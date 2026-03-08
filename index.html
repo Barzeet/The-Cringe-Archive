@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Archive of Their Own — Cringe, Affect & Refusal in Indian Instagram Reels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────── */
+:root {
+  --bg:        #08060f;
+  --bg2:       #0d0b18;
+  --bg3:       #141028;
+  --bg4:       #1c1835;
+
+  --parch:     #f0ead8;
+  --parch-60:  rgba(240,234,216,.6);
+  --parch-30:  rgba(240,234,216,.3);
+  --parch-10:  rgba(240,234,216,.1);
+  --parch-05:  rgba(240,234,216,.05);
+
+  --wine:      #6a1830;
+  --wine2:     #8a2240;
+  --rose:      #d4768a;
+  --rose-15:   rgba(212,118,138,.15);
+  --gold:      #c9a84c;
+  --gold-10:   rgba(201,168,76,.1);
+  --lav:       #9b8ec4;
+  --lav-10:    rgba(155,142,196,.1);
+  --teal:      #4e9a9c;
+
+  --border:    rgba(240,234,216,.09);
+  --border2:   rgba(240,234,216,.16);
+
+  --f-display: 'Playfair Display', serif;
+  --f-body:    'Cormorant Garamond', serif;
+  --f-mono:    'DM Mono', monospace;
+}
+
+/* ─────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--parch);
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size: 16px;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; background: none; border: none; color: inherit; cursor: pointer; }
+img { display: block; max-width: 100%; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--wine2); border-radius: 2px; }
+
+/* grain overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  opacity: .03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─────────────────────────────────────
+   SCROLL PROGRESS
+───────────────────────────────────── */
+#scroll-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(to right, var(--wine2), var(--rose), var(--lav));
+  z-index: 10000; transition: width .1s linear;
+}
+
+/* ─────────────────────────────────────
+   NAV
+───────────────────────────────────── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  transition: background .35s, border-color .35s;
+  border-bottom: 1px solid transparent;
+}
+#nav.solid {
+  background: rgba(8,6,15,.93);
+  backdrop-filter: blur(18px);
+  border-color: var(--border);
+}
+.nav-brand {
+  font-family: var(--f-mono);
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: .9rem;
+}
+.nav-brand::before {
+  content: ''; display: block; width: 18px; height: 1px; background: var(--gold);
+}
+.nav-links {
+  display: flex; list-style: none; gap: 2.2rem;
+}
+.nav-links a {
+  font-family: var(--f-mono); font-size: .58rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--parch-30); transition: color .2s;
+}
+.nav-links a:hover { color: var(--rose); }
+.nav-pill {
+  font-family: var(--f-mono); font-size: .58rem; letter-spacing: .14em;
+  border: 1px solid var(--border2); padding: .28rem .75rem; color: var(--parch-30);
+}
+
+/* ─────────────────────────────────────
+   SECTION UTILITIES
+───────────────────────────────────── */
+.s-wrap { max-width: 1260px; margin: 0 auto; padding: 6rem 2.5rem; }
+.s-wrap.narrow { max-width: 900px; }
+
+.tag-line {
+  font-family: var(--f-mono); font-size: .58rem;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--rose); display: flex; align-items: center; gap: .8rem;
+  margin-bottom: 1rem;
+}
+.tag-line::after { content: ''; display: block; width: 40px; height: 1px; background: var(--rose); opacity: .5; }
+
+.s-title {
+  font-family: var(--f-display); font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400; line-height: 1.05; letter-spacing: -.025em;
+}
+.s-title em { font-style: italic; color: var(--rose); }
+
+.s-body {
+  font-family: var(--f-body); font-size: 1.15rem;
+  line-height: 1.85; color: var(--parch-60); max-width: 720px;
+}
+.s-body strong { color: var(--parch); font-weight: 500; }
+
+.hr { max-width: 1260px; margin: 0 auto; height: 1px; background: var(--border); }
+
+/* fade-up reveal */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.d1 { transition-delay: .1s; }
+.reveal.d2 { transition-delay: .2s; }
+.reveal.d3 { transition-delay: .3s; }
+.reveal.d4 { transition-delay: .4s; }
+
+/* ─────────────────────────────────────
+   HERO
+───────────────────────────────────── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 9rem 2rem 5rem; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -5%, rgba(106,24,48,.6) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 110%, rgba(155,142,196,.12) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 40% at 10% 75%, rgba(78,154,156,.06) 0%, transparent 50%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+}
+.hero-inner { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  font-family: var(--f-mono); font-size: .62rem;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--rose);
+  display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  animation: fadeUp .8s .2s both;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; width: 36px; height: 1px; background: var(--rose); opacity: .5;
+}
+
+.hero-h1 {
+  font-family: var(--f-display);
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  font-weight: 900; line-height: .93; letter-spacing: -.03em;
+  animation: fadeUp 1s .4s both;
+}
+.hero-h1 .italic { font-style: italic; color: var(--rose); display: block; }
+.hero-h1 .sub {
+  display: block; font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+  font-weight: 400; color: var(--parch-60); letter-spacing: -.01em;
+  margin-top: .6rem;
+}
+
+.hero-desc {
+  font-family: var(--f-body); font-style: italic;
+  font-size: clamp(.95rem, 1.6vw, 1.2rem); color: var(--parch-60);
+  max-width: 540px; margin: 2.2rem auto 0; line-height: 1.75;
+  animation: fadeUp .8s .8s both;
+}
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 3.5rem;
+  margin: 3rem auto;
+  animation: fadeUp .8s 1s both;
+}
+.hstat-n {
+  font-family: var(--f-display); font-style: italic;
+  font-size: 2.8rem; color: var(--rose); display: block; line-height: 1;
+}
+.hstat-l {
+  font-family: var(--f-mono); font-size: .55rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--parch-30); display: block; margin-top: .3rem;
+}
+
+.hero-thesis {
+  max-width: 660px; margin: 0 auto;
+  border: 1px solid var(--border2);
+  background: linear-gradient(135deg, rgba(106,24,48,.1), rgba(155,142,196,.05));
+  padding: 1.75rem 2.25rem;
+  animation: fadeUp .8s 1.2s both;
+}
+.hero-thesis p {
+  font-family: var(--f-body); font-size: 1.08rem;
+  line-height: 1.75; color: var(--parch-60);
+}
+.hero-thesis strong { color: var(--parch); font-weight: 600; }
+
+.hero-btns {
+  display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem;
+  animation: fadeUp .8s 1.4s both;
+}
+.btn-fill {
+  font-family: var(--f-mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--wine2); border: 1px solid var(--rose);
+  color: var(--parch); padding: .8rem 1.8rem;
+  transition: background .2s, transform .2s; display: inline-block;
+}
+.btn-fill:hover { background: var(--wine); transform: translateY(-2px); }
+.btn-out {
+  font-family: var(--f-mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  border: 1px solid var(--border2); color: var(--parch-60);
+  padding: .8rem 1.8rem; transition: border-color .2s, color .2s;
+}
+.btn-out:hover { border-color: var(--rose); color: var(--rose); }
+
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  animation: fadeIn 1s 2s both;
+}
+.hero-scroll span {
+  font-family: var(--f-mono); font-size: .55rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--parch-30);
+}
+.hero-scroll-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--rose), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────
+   TICKER
+───────────────────────────────────── */
+.ticker {
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg2); padding: .85rem 0; overflow: hidden;
+}
+.ticker-track {
+  display: flex; gap: 2.5rem; white-space: nowrap;
+  animation: ticker 40s linear infinite;
+}
+.t-item {
+  font-family: var(--f-mono); font-size: .6rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--parch-30); flex-shrink: 0;
+}
+.t-item.accent {
+  font-family: var(--f-body); font-style: italic;
+  font-size: .82rem; letter-spacing: .06em; text-transform: none;
+  color: var(--rose);
+}
+
+/* ─────────────────────────────────────
+   THEORY
+───────────────────────────────────── */
+#theory { background: var(--bg); }
+
+.theory-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  align-items: start; margin-top: 4rem;
+}
+
+.theory-text p {
+  font-size: 1.1rem; line-height: 1.9; color: var(--parch-60);
+  margin-bottom: 1.4rem;
+}
+.theory-text strong { color: var(--parch); font-weight: 500; }
+
+.pullquote {
+  border-left: 3px solid var(--rose);
+  padding: 1.6rem 2rem;
+  background: linear-gradient(to right, rgba(106,24,48,.12), transparent);
+  margin: 2rem 0;
+}
+.pullquote blockquote {
+  font-family: var(--f-display); font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.5; color: var(--parch);
+}
+.pullquote cite {
+  display: block; margin-top: .8rem;
+  font-family: var(--f-mono); font-size: .58rem;
+  letter-spacing: .14em; color: var(--lav); font-style: normal;
+}
+
+.theory-cards { display: flex; flex-direction: column; gap: 1rem; }
+.theory-card {
+  border: 1px solid var(--border); background: var(--parch-05);
+  padding: 1.6rem 1.75rem; transition: border-color .25s, background .25s;
+  position: relative;
+}
+.theory-card:hover { border-color: rgba(212,118,138,.4); background: var(--rose-15); }
+.tc-num {
+  font-family: var(--f-display); font-style: italic;
+  font-size: 1.8rem; color: rgba(106,24,48,.35);
+  float: right; line-height: 1;
+}
+.tc-title {
+  font-family: var(--f-body); font-size: 1.1rem; font-weight: 600;
+  color: var(--gold); margin-bottom: .5rem;
+}
+.tc-body { font-size: .85rem; line-height: 1.7; color: var(--parch-30); }
+
+.cringe-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); margin-top: 5rem;
+}
+.cg-cell {
+  background: var(--bg3); padding: 2.25rem 2rem; transition: background .25s;
+}
+.cg-cell:hover { background: var(--bg4); }
+.cg-label {
+  font-family: var(--f-mono); font-size: .55rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: .6rem;
+}
+.cg-title { font-family: var(--f-body); font-size: 1.1rem; color: var(--rose); margin-bottom: .6rem; }
+.cg-body { font-size: .82rem; line-height: 1.7; color: var(--parch-30); }
+
+/* ─────────────────────────────────────
+   ARCHIVE
+───────────────────────────────────── */
+#archive { background: var(--bg2); }
+
+.archive-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  padding-bottom: 1.75rem; border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.search-box {
+  position: relative; display: flex; align-items: center;
+}
+.search-box input {
+  background: var(--parch-05); border: 1px solid var(--border2);
+  color: var(--parch); padding: .55rem 1rem .55rem 2.2rem;
+  font-family: var(--f-mono); font-size: .62rem; letter-spacing: .06em;
+  width: 250px; outline: none; transition: border-color .2s;
+}
+.search-box input::placeholder { color: var(--parch-30); }
+.search-box input:focus { border-color: var(--rose); }
+.search-icon {
+  position: absolute; left: .7rem; color: var(--parch-30); font-size: .9rem; pointer-events: none;
+}
+.filters { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.fl {
+  font-family: var(--f-mono); font-size: .55rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--parch-30); margin-right: .2rem;
+}
+.fchip {
+  font-family: var(--f-mono); font-size: .55rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: .3rem .8rem; border: 1px solid var(--border2);
+  color: var(--parch-30); transition: all .2s; cursor: pointer; background: none;
+}
+.fchip:hover, .fchip.on { border-color: var(--rose); color: var(--rose); background: var(--rose-15); }
+
+.archive-summary {
+  display: flex; gap: 2.5rem; margin-bottom: 2rem;
+}
+.as-item .asn {
+  font-family: var(--f-display); font-style: italic;
+  font-size: 2.2rem; color: var(--rose);
+}
+.as-item .asl {
+  font-family: var(--f-mono); font-size: .55rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--parch-30); display: block; margin-top: .2rem;
+}
+
+.entry-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem;
+}
+
+/* entry card */
+.ecard {
+  border: 1px solid var(--border); background: var(--bg3);
+  display: flex; flex-direction: column;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  position: relative; overflow: hidden;
+}
+.ecard::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--wine2), var(--rose), var(--lav));
+  opacity: 0; transition: opacity .25s;
+}
+.ecard:hover { border-color: rgba(212,118,138,.35); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
+.ecard:hover::after { opacity: 1; }
+
+/* thumbnail */
+.thumb {
+  width: 100%; aspect-ratio: 9/14; position: relative; overflow: hidden;
+  flex-shrink: 0; max-height: 420px;
+}
+.thumb-bg { position: absolute; inset: 0; }
+.thumb-pattern { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .25; }
+.thumb-pattern svg { width: 58%; height: auto; }
+.thumb-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,6,15,.96) 0%, rgba(8,6,15,.35) 55%, transparent 100%); }
+.thumb-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-58%);
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08);
+  backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, background .2s; pointer-events: none;
+}
+.thumb-play::after {
+  content: ''; display: block; width: 0; height: 0;
+  border-style: solid; border-width: 7px 0 7px 13px;
+  border-color: transparent transparent transparent rgba(255,255,255,.8);
+  margin-left: 3px;
+}
+.ecard:hover .thumb-play { border-color: var(--rose); background: var(--rose-15); }
+.thumb-info {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 1.1rem 1.25rem;
+}
+.thumb-handle {
+  font-family: var(--f-mono); font-size: .72rem;
+  color: rgba(255,255,255,.88); letter-spacing: .04em;
+  margin-bottom: .2rem; display: flex; align-items: center; gap: .3rem;
+}
+.thumb-handle .at { opacity: .55; font-size: .62rem; }
+.thumb-count {
+  font-family: var(--f-mono); font-size: .58rem;
+  color: rgba(255,255,255,.4); letter-spacing: .06em; margin-bottom: .8rem;
+}
+.thumb-igbtn {
+  font-family: var(--f-mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06);
+  backdrop-filter: blur(6px); color: rgba(255,255,255,.7);
+  padding: .38rem .9rem; display: inline-block;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.thumb-igbtn:hover { border-color: var(--rose); color: var(--rose); background: var(--rose-15); }
+
+/* card body */
+.card-head {
+  padding: 1rem 1.35rem .8rem;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  border-bottom: 1px solid var(--border);
+}
+.card-creator { flex: 1; }
+.card-name {
+  font-family: var(--f-mono); font-size: .72rem; color: var(--gold);
+  letter-spacing: .04em; margin-bottom: .25rem;
+}
+.card-meta-sub {
+  font-family: var(--f-mono); font-size: .58rem;
+  color: var(--parch-30); letter-spacing: .05em;
+}
+.card-tags { display: flex; flex-wrap: wrap; gap: .25rem; }
+.tag {
+  font-family: var(--f-mono); font-size: .52rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .15rem .45rem; border: 1px solid var(--border2);
+  color: var(--parch-30);
+}
+.tag.cl { border-color: rgba(201,168,76,.35); color: var(--gold); }
+.tag.ge { border-color: rgba(212,118,138,.4); color: var(--rose); }
+.tag.qu { border-color: rgba(155,142,196,.4); color: var(--lav); }
+.tag.fo { border-color: rgba(78,154,156,.4); color: var(--teal); }
+.tag.da { border-color: rgba(212,118,138,.25); color: #e09098; }
+
+.card-info { padding: .85rem 1.35rem; border-bottom: 1px solid var(--border); }
+.info-row {
+  display: flex; justify-content: space-between;
+  padding: .24rem 0; border-bottom: 1px solid rgba(240,234,216,.03);
+}
+.info-row:last-child { border: none; }
+.ik { font-family: var(--f-mono); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; color: var(--parch-30); }
+.iv { font-size: .78rem; color: var(--parch-60); text-align: right; max-width: 55%; }
+
+.card-comments { padding: .85rem 1.35rem; border-bottom: 1px solid var(--border); }
+.comments-label {
+  font-family: var(--f-mono); font-size: .56rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--parch-30); margin-bottom: .6rem;
+  display: flex; align-items: center; gap: .6rem;
+}
+.comments-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.cmt {
+  font-family: var(--f-body); font-style: italic;
+  font-size: .9rem; line-height: 1.5; color: var(--parch-60);
+  padding: .35rem 0; border-bottom: 1px solid rgba(240,234,216,.04);
+  position: relative; padding-left: .9rem;
+}
+.cmt::before { content: '"'; position: absolute; left: 0; color: var(--rose); font-style: normal; opacity: .6; }
+.cmt:last-child { border: none; }
+.cmt.flagged { color: var(--rose); }
+
+.card-note { padding: .85rem 1.35rem; background: rgba(106,24,48,.08); }
+.note-label {
+  font-family: var(--f-mono); font-size: .56rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: .45rem;
+  display: flex; align-items: center; gap: .6rem;
+}
+.note-label::after { content: ''; flex: 1; height: 1px; background: rgba(212,118,138,.2); }
+.note-text { font-size: .8rem; line-height: 1.7; color: var(--parch-60); }
+
+.card-expand {
+  width: 100%; padding: .75rem 1.35rem;
+  font-family: var(--f-mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--parch-30); border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  transition: color .2s, background .2s;
+}
+.card-expand::before, .card-expand::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.card-expand:hover { color: var(--rose); background: var(--rose-15); }
+
+/* ─────────────────────────────────────
+   MODAL
+───────────────────────────────────── */
+#modal {
+  position: fixed; inset: 0; z-index: 5000;
+  background: rgba(8,6,15,.94); backdrop-filter: blur(20px);
+  display: none; align-items: center; justify-content: center; padding: 1.5rem;
+}
+#modal.open { display: flex; }
+.modal-inner {
+  background: var(--bg3); border: 1px solid var(--border2);
+  max-width: 860px; width: 100%; max-height: 90vh;
+  overflow-y: auto; position: relative;
+}
+.modal-inner::-webkit-scrollbar { width: 3px; }
+.modal-inner::-webkit-scrollbar-thumb { background: var(--wine2); }
+.modal-bar {
+  position: sticky; top: 0; z-index: 10; background: var(--bg3);
+  border-bottom: 1px solid var(--border); padding: .7rem 1.25rem;
+  display: flex; justify-content: flex-end;
+}
+.modal-close-btn {
+  font-family: var(--f-mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase;
+  border: 1px solid var(--border2); padding: .35rem .85rem; color: var(--parch-30);
+  transition: border-color .2s, color .2s;
+}
+.modal-close-btn:hover { border-color: var(--rose); color: var(--rose); }
+.modal-content { padding: 2rem 2.5rem 3rem; }
+
+/* ─────────────────────────────────────
+   GENDER SECTION
+───────────────────────────────────── */
+#gender { background: var(--bg); }
+.gender-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+
+.meter-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.5rem; }
+.m-item { }
+.m-head { display: flex; justify-content: space-between; margin-bottom: .4rem; }
+.m-label { font-size: .82rem; color: var(--parch-60); }
+.m-level { font-family: var(--f-mono); font-size: .58rem; color: var(--lav); }
+.m-track { height: 2px; background: rgba(240,234,216,.08); position: relative; }
+.m-fill {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  background: linear-gradient(to right, var(--wine2), var(--rose));
+  width: 0; transition: width 1.6s cubic-bezier(.4,0,.2,1);
+}
+.m-dot { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+
+.vtypes { display: flex; flex-direction: column; gap: .8rem; }
+.vt {
+  border: 1px solid var(--border); padding: 1.1rem 1.4rem;
+  transition: border-color .25s, background .25s;
+}
+.vt:hover { border-color: var(--lav); background: var(--lav-10); }
+.vt-name { font-family: var(--f-body); font-size: 1.05rem; color: var(--rose); margin-bottom: .35rem; }
+.vt-desc { font-size: .8rem; line-height: 1.65; color: var(--parch-30); }
+
+/* ─────────────────────────────────────
+   CATHARSIS
+───────────────────────────────────── */
+#catharsis { background: var(--bg2); }
+.cath-layout { display: grid; grid-template-columns: 1fr 360px; gap: 4rem; margin-top: 4rem; }
+
+.feed { display: flex; flex-direction: column; gap: .6rem; }
+.feed-item {
+  border: 1px solid var(--border); background: var(--parch-05);
+  padding: .8rem 1.1rem; opacity: 0; transform: translateX(-14px);
+  transition: opacity .5s, transform .5s;
+}
+.feed-item.shown { opacity: 1; transform: translateX(0); }
+.fi-user { font-family: var(--f-mono); font-size: .58rem; color: var(--lav); margin-bottom: .3rem; letter-spacing: .04em; }
+.fi-text { font-size: .9rem; color: var(--parch-60); line-height: 1.5; }
+.fi-text.key { font-family: var(--f-body); font-style: italic; color: var(--rose); font-size: 1rem; }
+
+.cath-side { position: sticky; top: 7rem; }
+.cath-box {
+  border: 1px solid var(--border); padding: 1.75rem;
+  margin-bottom: 1.25rem; background: var(--parch-05);
+}
+.cath-box h3 {
+  font-family: var(--f-display); font-style: italic;
+  font-size: 1.2rem; color: var(--rose); margin-bottom: .8rem;
+}
+.cath-box p { font-size: .82rem; line-height: 1.75; color: var(--parch-60); }
+.stat-4 {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.s4 { background: var(--bg3); padding: 1.35rem 1rem; text-align: center; }
+.s4n { font-family: var(--f-display); font-style: italic; font-size: 1.9rem; color: var(--rose); display: block; }
+.s4l { font-family: var(--f-mono); font-size: .52rem; letter-spacing: .12em; text-transform: uppercase; color: var(--parch-30); display: block; margin-top: .25rem; }
+
+/* ─────────────────────────────────────
+   METHODS
+───────────────────────────────────── */
+#methods { background: var(--bg); }
+.methods-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem;
+}
+.mg-cell { background: var(--bg); padding: 2.25rem 1.75rem; transition: background .25s; }
+.mg-cell:hover { background: var(--bg3); }
+.mg-n { font-family: var(--f-display); font-style: italic; font-size: 2.6rem; color: rgba(106,24,48,.25); display: block; margin-bottom: .8rem; }
+.mg-title { font-family: var(--f-body); font-size: 1.05rem; color: var(--gold); margin-bottom: .55rem; }
+.mg-body { font-size: .78rem; line-height: 1.7; color: var(--parch-30); }
+
+.tools-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 0;
+}
+.tg-cell { background: var(--bg); padding: 2rem 1.75rem; transition: background .25s; }
+.tg-cell:hover { background: var(--bg3); }
+.tg-lbl { font-family: var(--f-mono); font-size: .52rem; letter-spacing: .16em; text-transform: uppercase; color: var(--lav); margin-bottom: .4rem; }
+.tg-title { font-family: var(--f-body); font-size: 1.05rem; color: var(--rose); margin-bottom: .5rem; }
+.tg-body { font-size: .78rem; line-height: 1.65; color: var(--parch-30); }
+
+/* ─────────────────────────────────────
+   DATA VISUALIZATIONS
+   NOTE: panels are NOT wrapped in .reveal
+   to avoid opacity conflict with chart animations
+───────────────────────────────────── */
+#viz { background: var(--bg2); }
+
+.viz-intro { margin-bottom: 3rem; }
+
+.viz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.vp {
+  border: 1px solid var(--border); padding: 2rem;
+  background: var(--bg3);
+}
+.vp.full { grid-column: 1 / -1; }
+
+.vp-title {
+  font-family: var(--f-mono); font-size: .58rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--lav);
+  margin-bottom: 1.75rem; padding-bottom: .75rem; border-bottom: 1px solid var(--border);
+}
+
+/* word cloud */
+.wordcloud { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; justify-content: center; min-height: 200px; }
+.wc-word { font-family: var(--f-body); font-style: italic; cursor: default; transition: color .2s; }
+.wc-word:hover { color: var(--rose) !important; }
+
+/* bar chart — uses SVG rendered by JS */
+.bar-chart-wrap { width: 100%; }
+
+/* donut */
+.donut-wrap { display: flex; align-items: center; justify-content: center; gap: 2.5rem; padding: .5rem 0; }
+#donut-svg { flex-shrink: 0; }
+.donut-legend { display: flex; flex-direction: column; gap: .7rem; }
+.dl { display: flex; align-items: center; gap: .65rem; font-size: .82rem; color: var(--parch-60); }
+.dl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+/* scatter canvas */
+#scatter { display: block; width: 100%; height: 280px; }
+
+/* ─────────────────────────────────────
+   QUESTIONS
+───────────────────────────────────── */
+#questions {
+  background: linear-gradient(to bottom, var(--bg), var(--bg3));
+  text-align: center;
+}
+.q-items { max-width: 700px; margin: 3.5rem auto 0; }
+.q-item {
+  padding: 2rem 0; border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .6s, transform .6s;
+}
+.q-item.in { opacity: 1; transform: none; }
+.q-text {
+  font-family: var(--f-display); font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.35rem); color: var(--parch-60); line-height: 1.45;
+}
+.q-text em { font-style: normal; color: var(--rose); }
+
+/* ─────────────────────────────────────
+   MANIFESTO (wine bar)
+───────────────────────────────────── */
+#manifesto {
+  background: var(--wine); border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.man-wrap { max-width: 1000px; margin: 0 auto; padding: 7rem 2.5rem; text-align: center; }
+.man-h { font-family: var(--f-display); font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; letter-spacing: -.02em; margin-bottom: 3.5rem; }
+.man-items { display: grid; grid-template-columns: repeat(3,1fr); gap: 3rem; text-align: left; margin-bottom: 3rem; }
+.man-n { font-family: var(--f-display); font-style: italic; font-size: 2.8rem; color: rgba(255,255,255,.12); display: block; margin-bottom: .5rem; }
+.man-item p { font-family: var(--f-body); font-size: 1.1rem; line-height: 1.75; color: rgba(255,255,255,.75); }
+.man-item p strong { color: #fff; font-weight: 600; }
+.man-close {
+  font-family: var(--f-display); font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem); color: rgba(255,255,255,.75); line-height: 1.55;
+}
+
+/* ─────────────────────────────────────
+   SO WHAT
+───────────────────────────────────── */
+#sowhat { background: var(--bg3); }
+.sw-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
+.sw-c { background: var(--bg3); padding: 2.5rem 2rem; transition: background .25s; }
+.sw-c:hover { background: var(--bg4); }
+.sw-sym { font-size: 1.1rem; color: var(--rose); margin-bottom: .9rem; display: block; }
+.sw-title { font-family: var(--f-body); font-size: 1.1rem; color: var(--parch); margin-bottom: .55rem; }
+.sw-body { font-size: .8rem; line-height: 1.75; color: var(--parch-30); }
+
+/* ─────────────────────────────────────
+   FUTURE
+───────────────────────────────────── */
+#future { background: var(--bg); }
+.fut-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; margin-top: 3rem; }
+.fut-card { border: 1px dashed rgba(240,234,216,.1); padding: 1.75rem; transition: border-color .25s; }
+.fut-card:hover { border-color: rgba(155,142,196,.3); }
+.fut-badge {
+  font-family: var(--f-mono); font-size: .52rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--lav); background: var(--lav-10); border: 1px solid rgba(155,142,196,.25);
+  padding: .15rem .5rem; display: inline-block; margin-bottom: .8rem;
+}
+.fut-title { font-family: var(--f-body); font-size: 1rem; color: rgba(240,234,216,.45); margin-bottom: .5rem; }
+.fut-body { font-size: .76rem; line-height: 1.65; color: var(--parch-30); }
+
+/* ─────────────────────────────────────
+   BIBLIOGRAPHY
+───────────────────────────────────── */
+#bib { background: var(--bg2); }
+.bib-cols { columns: 2; column-gap: 3rem; margin-top: 2rem; }
+.bib-e {
+  font-family: var(--f-body); font-size: .95rem; line-height: 1.65;
+  color: var(--parch-30); margin-bottom: .85rem; break-inside: avoid;
+  padding-left: 1.35rem; text-indent: -1.35rem;
+}
+.bib-e em { font-style: italic; color: var(--parch-60); }
+
+/* ─────────────────────────────────────
+   FOOTER
+───────────────────────────────────── */
+footer {
+  background: var(--bg); border-top: 1px solid var(--border);
+  padding: 3rem 2.5rem;
+}
+.footer-inner { max-width: 1260px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.footer-l .ft { font-family: var(--f-display); font-style: italic; font-size: 1rem; color: var(--parch-60); }
+.footer-l .fs { font-family: var(--f-mono); font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; color: var(--parch-30); margin-top: .3rem; }
+.footer-r { font-family: var(--f-body); font-style: italic; font-size: .9rem; color: var(--parch-30); text-align: right; max-width: 380px; }
+
+/* ─────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes pulse { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
+@media (max-width: 900px) {
+  #nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .s-wrap { padding: 4rem 1.25rem; }
+  .theory-layout, .gender-layout, .cath-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .cringe-grid, .methods-grid, .tools-grid, .man-items, .sw-3, .fut-3 { grid-template-columns: 1fr; }
+  .viz-grid { grid-template-columns: 1fr; }
+  .bib-cols { columns: 1; }
+  .entry-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+}
+
+</style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <span class="nav-brand">Archive · 2026</span>
+  <ul class="nav-links">
+    <li><a href="#theory">Theory</a></li>
+    <li><a href="#archive">Collection</a></li>
+    <li><a href="#gender">Visibility</a></li>
+    <li><a href="#catharsis">Catharsis</a></li>
+    <li><a href="#viz">Data</a></li>
+    <li><a href="#bib">References</a></li>
+  </ul>
+  <span class="nav-pill">16 entries</span>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">A Digital Humanities Research Archive</p>
+    <h1 class="hero-h1">
+      An Archive of
+      <span class="italic">Their Own</span>
+      <span class="sub">Affect, Refusal, and Cringe<br>in Indian Instagram Reels</span>
+    </h1>
+    <p class="hero-desc">Documenting moments where norm enforcement meets aesthetic refusal — and the performers who kept posting anyway.</p>
+    <div class="hero-stats">
+      <div class="hstat-item"><span class="hstat-n">16</span><span class="hstat-l">Archive entries</span></div>
+      <div class="hstat-item"><span class="hstat-n">340+</span><span class="hstat-l">Comments coded</span></div>
+      <div class="hstat-item"><span class="hstat-n">9</span><span class="hstat-l">Circulation chains</span></div>
+    </div>
+    <div class="hero-thesis">
+      <p><strong>Cringe is not in the video.</strong> It is in the social reaction to visible non-compliance — the audience's affective response to performances that refuse to assimilate into dominant norms of digital self-presentation. This archive documents that refusal as <strong>tiny protest</strong>.</p>
+    </div>
+    <div class="hero-btns">
+      <a href="#archive" class="btn-fill">Enter the Archive ↓</a>
+      <a href="#theory" class="btn-out">Read the Theory</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track">
+    <span class="t-item">Affect &amp; Refusal</span><span class="t-item">·</span>
+    <span class="t-item accent">Cringe is not in the video</span><span class="t-item">·</span>
+    <span class="t-item">Digital Self-Making</span><span class="t-item">·</span>
+    <span class="t-item accent">Norm Enforcement</span><span class="t-item">·</span>
+    <span class="t-item">Aesthetic Hierarchy</span><span class="t-item">·</span>
+    <span class="t-item accent">Tiny Protests</span><span class="t-item">·</span>
+    <span class="t-item">Instagram Reels · Indian Digital Culture</span><span class="t-item">·</span>
+    <span class="t-item accent">Shame as Political Emotion</span><span class="t-item">·</span>
+    <span class="t-item">Visibility Without Safety Nets</span><span class="t-item">·</span>
+    <span class="t-item accent">Who defined the right way to be visible?</span><span class="t-item">·</span>
+    <span class="t-item">Affect &amp; Refusal</span><span class="t-item">·</span>
+    <span class="t-item accent">Cringe is not in the video</span><span class="t-item">·</span>
+    <span class="t-item">Digital Self-Making</span><span class="t-item">·</span>
+    <span class="t-item accent">Norm Enforcement</span><span class="t-item">·</span>
+    <span class="t-item">Aesthetic Hierarchy</span><span class="t-item">·</span>
+    <span class="t-item accent">Tiny Protests</span><span class="t-item">·</span>
+    <span class="t-item">Instagram Reels · Indian Digital Culture</span><span class="t-item">·</span>
+    <span class="t-item accent">Shame as Political Emotion</span><span class="t-item">·</span>
+    <span class="t-item">Visibility Without Safety Nets</span><span class="t-item">·</span>
+    <span class="t-item accent">Who defined the right way to be visible?</span><span class="t-item">·</span>
+  </div>
+</div>
+
+<!-- THEORY -->
+<section id="theory">
+  <div class="s-wrap">
+    <p class="tag-line reveal">00 — Theoretical Framework</p>
+    <h2 class="s-title reveal">What Is <em>Cringe?</em></h2>
+
+    <div class="theory-layout">
+      <div class="theory-text reveal">
+        <p>Cringe is often dismissed as a matter of bad taste — a joke, a scroll-past, a burst of collective laughter. This archive refuses that dismissal. <strong>Cringe is not in the video.</strong> It is in the social reaction to visible non-compliance. It emerges at the intersection of performance and judgment, affect and hierarchy.</p>
+        <p>When audiences mark content as "cringe," they are performing a social function: <strong>signaling that a norm has been violated.</strong> The discomfort is not aesthetic. It is political. It tells certain bodies and certain kinds of visibility: you should not be here, not like this, not as you are.</p>
+        <p>This archive takes cringe seriously as a sociological phenomenon — documenting not the performers as embarrassing subjects, but the social machinery of embarrassment itself.</p>
+        <div class="pullquote">
+          <blockquote>"Cringe seems to be an affective and effective way of making the distinction between normal and non-normal deviance."</blockquote>
+          <cite>— Patrick Wöhrle, <em>Two Shades of Cringe</em>, Humanities (2021)</cite>
+        </div>
+        <div class="pullquote" style="border-color:var(--lav)">
+          <blockquote>"Cringe is culture saying: 'You should have known better.' Refusal is the performer saying: 'I don't accept your terms.'"</blockquote>
+          <cite>— Archive Thesis</cite>
+        </div>
+      </div>
+      <div class="theory-cards reveal d2">
+        <div class="theory-card"><span class="tc-num">I</span><div class="tc-title">Cringe as Enforcement</div><p class="tc-body">Cringe marks moments when performance appears socially "out of place." Shame and secondhand embarrassment function as regulatory affects — disciplining the performer back into normative digital selfhood (Wöhrle, Smilges, Tomkins).</p></div>
+        <div class="theory-card"><span class="tc-num">II</span><div class="tc-title">Cringe as Aesthetic Hierarchy</div><p class="tc-body">Digital culture relies on self-surveillance (Foucault / Greenblatt). Users are expected to anticipate judgment and adjust algorithmically. Cringe enforces who looks "naturally" at home online — mapping class, caste, and gender onto aesthetic competence.</p></div>
+        <div class="theory-card"><span class="tc-num">III</span><div class="tc-title">Cringe as Cathartic Spectacle</div><p class="tc-body">Aristotle's catharsis in digital form: audiences gather to experience secondhand humiliation, releasing their own social anxieties through watching another perform "wrongly." Shame becomes shareable content with measurable return-visit rates.</p></div>
+        <div class="theory-card"><span class="tc-num">IV</span><div class="tc-title">Cringe as Tiny Protest</div><p class="tc-body">The counter-reading this archive proposes: persistence in the face of ridicule — the continued posting — constitutes a form of refusal with political valence, however unintentional. These are tiny protests in the economy of visibility.</p></div>
+      </div>
+    </div>
+
+    <div class="cringe-grid reveal" style="margin-top:5rem">
+      <div class="cg-cell">
+        <div class="cg-label">When cringe appears</div>
+        <div class="cg-title">Non-Compliance</div>
+        <p class="cg-body">The performer does not self-correct. The performance remains unapologetic. Posting continues at high frequency despite negative comment discourse and calls to report.</p>
+      </div>
+      <div class="cg-cell">
+        <div class="cg-label">What cringe marks</div>
+        <div class="cg-title">The Out-of-Place</div>
+        <p class="cg-body">Non-elite interiors. Regional accents. Low-production aesthetics. Visible effort without polish. Bodies considered wrong for the medium. Age. Class. Queerness. Domestic labor made proudly public.</p>
+      </div>
+      <div class="cg-cell">
+        <div class="cg-label">What cringe does</div>
+        <div class="cg-title">Norm Enforcement</div>
+        <p class="cg-body">Shame circulates socially (Ahmed). It attaches to certain bodies, accumulates through repetition, becomes "sticky." The archive documents this circulation — and the moments when performers metabolise the shame and post again anyway.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ARCHIVE -->
+<section id="archive">
+  <div class="s-wrap">
+    <p class="tag-line reveal">01 — The Collection</p>
+    <h2 class="s-title reveal">Archive <em>Entries</em></h2>
+    <p class="s-body reveal" style="margin-top:.75rem">Sixteen entries, each documenting a performance, the audience reaction it generated, and patterns of circulation. The archive does not judge creators — it records how audiences react and how those reactions create social meaning.</p>
+
+    <div class="archive-summary reveal" style="margin-top:2rem">
+      <div class="as-item"><span class="asn">16</span><span class="asl">Total entries</span></div>
+      <div class="as-item"><span class="asn">8</span><span class="asl">Class markers</span></div>
+      <div class="as-item"><span class="asn">7</span><span class="asl">Gender policing</span></div>
+      <div class="as-item"><span class="asn">4</span><span class="asl">Queer visibility</span></div>
+    </div>
+
+    <div class="archive-controls reveal">
+      <div class="search-box">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="q" placeholder="Search creators, themes, keywords…">
+      </div>
+      <div class="filters">
+        <span class="fl">Filter :</span>
+        <button class="fchip on" data-f="all">All</button>
+        <button class="fchip" data-f="class">Class</button>
+        <button class="fchip" data-f="gender">Gender</button>
+        <button class="fchip" data-f="queer">Queer</button>
+        <button class="fchip" data-f="food">Food</button>
+        <button class="fchip" data-f="dance">Dance</button>
+        <button class="fchip" data-f="high-freq">High Freq</button>
+        <button class="fchip" data-f="circulation">Circulation</button>
+      </div>
+    </div>
+
+    <div class="entry-grid" id="entry-grid"></div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- GENDER -->
+<section id="gender">
+  <div class="s-wrap">
+    <p class="tag-line reveal">02 — Gender, Queerness &amp; Refusal</p>
+    <h2 class="s-title reveal">Visibility <em>Policed</em></h2>
+    <div class="gender-layout">
+      <div class="reveal">
+        <p class="s-body" style="margin-top:.5rem">Women's visibility is tightly policed online. Cringe often attaches when women appear too confident, too expressive, too present. The archive includes cis women, trans women, and queer love performances — forms of visibility that challenge normative gender and desire scripts in the Indian context.</p>
+        <h3 style="font-family:var(--f-body);font-size:1.2rem;color:var(--gold);margin:2rem 0 .25rem">How Cringe Attaches to Women</h3>
+        <p style="font-size:.78rem;color:var(--parch-30);margin-bottom:1.5rem">Frequency of cringe attribution by category — comment corpus analysis</p>
+        <div class="meter-list" id="meter-list">
+          <div class="m-item" data-w="92"><div class="m-head"><span class="m-label">Too confident / too much presence</span><span class="m-level">Very High</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+          <div class="m-item" data-w="95"><div class="m-head"><span class="m-label">Queer / WLW visibility</span><span class="m-level">Very High</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+          <div class="m-item" data-w="88"><div class="m-head"><span class="m-label">Trans women performing publicly</span><span class="m-level">High</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+          <div class="m-item" data-w="83"><div class="m-head"><span class="m-label">Too expressive / too joyful</span><span class="m-level">High</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+          <div class="m-item" data-w="74"><div class="m-head"><span class="m-label">Non-elite class markers visible</span><span class="m-level">Medium-High</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+          <div class="m-item" data-w="68"><div class="m-head"><span class="m-label">Age — "too old for this platform"</span><span class="m-level">Medium</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+          <div class="m-item" data-w="62"><div class="m-head"><span class="m-label">Regional language / accent</span><span class="m-level">Medium</span></div><div class="m-track"><div class="m-fill"></div><div class="m-dot"></div></div></div>
+        </div>
+      </div>
+      <div class="vtypes reveal d2">
+        <h3 style="font-family:var(--f-body);font-size:1.2rem;color:var(--gold);margin-bottom:1.25rem">Visibility Types in the Archive</h3>
+        <div class="vt"><div class="vt-name">Women in Domestic Space</div><p class="vt-desc">Cooking, household labor, daily routine. Cringe attaches through class markers: open fires, modest interiors, absence of aesthetic polish.</p></div>
+        <div class="vt"><div class="vt-name">Women Dancing / Being Joyful</div><p class="vt-desc">Unapologetic public joy. The wide-armed dance, the open laugh, the defiant stare at camera — generates the strongest cringe-as-regulation response.</p></div>
+        <div class="vt"><div class="vt-name">Trans Women in Public Space</div><p class="vt-desc">Visibility in non-domestic spaces — petrol pumps, streets, markets. The archive documents violent comment discourse and communities of fierce affirmation.</p></div>
+        <div class="vt"><div class="vt-name">Queer Love / WLW</div><p class="vt-desc">Women-loving-women content navigates specific legal and social risks in India. Cringe reactions blend with moral condemnation, making visibility itself the act of protest.</p></div>
+        <div class="vt"><div class="vt-name">Older Women as Performers</div><p class="vt-desc">"Aunty" discourse is the archive's most common comment category — age-based shame applied to middle-aged women's digital ambition.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CATHARSIS -->
+<section id="catharsis">
+  <div class="s-wrap">
+    <p class="tag-line reveal">03 — Catharsis &amp; Spectacle</p>
+    <h2 class="s-title reveal">The Economy of <em>Watching</em></h2>
+    <div class="cath-layout">
+      <div>
+        <p class="s-body reveal" style="margin-bottom:2rem">Cringe is also spectacular. Audiences gather to experience secondhand humiliation, collective embarrassment, emotional release. This creates an economy of watching where shame becomes shareable content — and the performer, despite the ridicule, generates sustained viewership that polished creators rarely achieve.</p>
+        <h3 class="reveal" style="font-family:var(--f-body);font-size:1.15rem;color:var(--gold);margin-bottom:.9rem">Live Comment Stream — Reconstructed</h3>
+        <div class="feed reveal" id="feed">
+          <div class="feed-item"><div class="fi-user">@anonymous.watcher.04</div><div class="fi-text">I cannot stop watching this. What is wrong with me</div></div>
+          <div class="feed-item"><div class="fi-user">@ranjit.anand.17</div><div class="fi-text">Bhai report kar isko someone please 😭😭</div></div>
+          <div class="feed-item"><div class="fi-user">@naina_scrolls</div><div class="fi-text key">"This was absolutely terrible. Same time tomorrow?"</div></div>
+          <div class="feed-item"><div class="fi-user">@akhil_memes</div><div class="fi-text">The algorithm knew what I needed tonight and it was THIS</div></div>
+          <div class="feed-item"><div class="fi-user">@priyanka.watches</div><div class="fi-text">My secondhand embarrassment has a secondhand embarrassment 💀</div></div>
+          <div class="feed-item"><div class="fi-user">@sharma.krishna99</div><div class="fi-text">I showed this to my whole family. We watched it 6 times. We don't understand why.</div></div>
+          <div class="feed-item"><div class="fi-user">@devanshi__06</div><div class="fi-text">She cooked the food AND my cringe receptors simultaneously</div></div>
+          <div class="feed-item"><div class="fi-user">@anon.lurker.2398</div><div class="fi-text">ok but why does she have 1M followers if this is so bad??? asking for myself</div></div>
+          <div class="feed-item"><div class="fi-user">@feminist.notes</div><div class="fi-text key">"Can we talk about how 'cringe' almost always describes women who are just… present?"</div></div>
+          <div class="feed-item"><div class="fi-user">@nitesh.watching</div><div class="fi-text">It's 3AM and I've watched 47 of her videos. I'm not okay.</div></div>
+          <div class="feed-item"><div class="fi-user">@solidarity.acc</div><div class="fi-text">Aunty ki himmat ko salaam. Keep going. 🙏</div></div>
+          <div class="feed-item"><div class="fi-user">@lurk_mode_on</div><div class="fi-text">saved. sending to group. this is why I have friends</div></div>
+        </div>
+      </div>
+      <div class="cath-side reveal d2">
+        <div class="cath-box">
+          <h3>The Aristotle Problem</h3>
+          <p>Aristotle's catharsis describes the purging of pity and fear through theatrical spectacle. Cringe viewing operates by analogous logic: audiences release social anxiety about their own digital performances by watching another person perform "wrongly." The creator becomes an unwitting therapeutic resource.</p>
+        </div>
+        <div class="cath-box" style="border-color:var(--lav)">
+          <h3>The Paradox of Return</h3>
+          <p>The recurring comment pattern — "this was terrible, same time tomorrow?" — captures the fundamental paradox: audiences who claim to be repulsed return daily. The stated affect (cringe, disgust) and actual behavior (consumption, sharing) are precisely opposite. The archive reads this as evidence that cringe discourse is <em>performed</em> social regulation, not sincere emotion.</p>
+        </div>
+        <div class="stat-4">
+          <div class="s4"><span class="s4n">6×</span><span class="s4l">Avg rewatches on "viral cringe"</span></div>
+          <div class="s4"><span class="s4n">3.2×</span><span class="s4l">Higher share rate vs standard reels</span></div>
+          <div class="s4"><span class="s4n">74%</span><span class="s4l">Comments show ambivalent fascination</span></div>
+          <div class="s4"><span class="s4n">∞</span><span class="s4l">Return visits despite stated discomfort</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- METHODS -->
+<section id="methods">
+  <div class="s-wrap">
+    <p class="tag-line reveal">04 — Digital Humanities Methods</p>
+    <h2 class="s-title reveal">Method as <em>Archival Practice</em></h2>
+    <p class="s-body reveal" style="margin-top:.75rem">The archive is built through manual ethnographic observation, digital annotation, and computational text analysis. Each method generates a different layer: the performance, the audience reaction, and the structural pattern.</p>
+    <div class="methods-grid">
+      <div class="mg-cell reveal"><span class="mg-n">01</span><div class="mg-title">Reel Collection</div><p class="mg-body">Instagram Reels collected through platform observation, comment-section mining, and cringe-compilation tracking. Selection criteria: evidence of cringe comment discourse, circulation evidence, low assimilation to platform polish norms.</p></div>
+      <div class="mg-cell reveal d1"><span class="mg-n">02</span><div class="mg-title">Metadata Annotation</div><p class="mg-body">Each entry manually annotated across seven axes: performance type, posting frequency, editing level, language, visible environment, comment tone, and circulation pattern. Annotation is interpretive, not algorithmic.</p></div>
+      <div class="mg-cell reveal d2"><span class="mg-n">03</span><div class="mg-title">Comment Analysis</div><p class="mg-body">Comment sections documented as affective evidence. Comments coded across four types: correction, mockery, fascination, and solidarity. Voyant and Python/Pandas provide word frequency and thematic categorisation.</p></div>
+      <div class="mg-cell reveal d3"><span class="mg-n">04</span><div class="mg-title">Circulation Tracing</div><p class="mg-body">Remix and imitation chains traced by following audio use, monitoring YouTube compilation videos, and tracking screenshot-based shares via reverse image search. Nine confirmed circulation chains documented.</p></div>
+    </div>
+    <div class="tools-grid">
+      <div class="tg-cell reveal"><div class="tg-lbl">Computational</div><div class="tg-title">Voyant Tools</div><p class="tg-body">Word frequency and corpus visualisation of the full comment dataset. Identifies dominant affective terms: "disgusting," "aunty," "properly," "women," "dance," "madam." Collocations reveal comment type clusters.</p></div>
+      <div class="tg-cell reveal d1"><div class="tg-lbl">Computational</div><div class="tg-title">Python / Pandas</div><p class="tg-body">Thematic categorisation of comment types. DataFrame analysis of posting frequency distributions. Chi-square testing for correlation between creator class markers and comment hostility scores.</p></div>
+      <div class="tg-cell reveal d2"><div class="tg-lbl">Computational</div><div class="tg-title">Embedding Analysis</div><p class="tg-body">Semantic analysis using word2vec to detect affective clustering in comment language. Identifies how "cringe" discourse groups around class, gender, and visibility themes without explicit category labeling.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- DATA VIZ — panels are visible immediately, no reveal wrapper -->
+<section id="viz">
+  <div class="s-wrap">
+    <div class="viz-intro">
+      <p class="tag-line reveal">05 — Data Visualisations</p>
+      <h2 class="s-title reveal">Patterns in the <em>Comment Corpus</em></h2>
+    </div>
+    <div class="viz-grid">
+
+      <div class="vp">
+        <div class="vp-title">Word Frequency — Voyant Analysis (n = 340+ comments)</div>
+        <div class="wordcloud" id="wc"></div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-title">Top Keywords by Frequency — Pandas Analysis</div>
+        <div class="bar-chart-wrap" id="bar1"></div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-title">Thematic Distribution — Comment Categories</div>
+        <div class="bar-chart-wrap" id="bar2"></div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-title">Sentiment Distribution — Full Corpus</div>
+        <div class="donut-wrap">
+          <svg id="donut-svg" width="170" height="170" viewBox="0 0 170 170"></svg>
+          <div class="donut-legend" id="donut-legend"></div>
+        </div>
+      </div>
+
+      <div class="vp full">
+        <div class="vp-title">Semantic Similarity Clusters — Word2Vec Embedding (Comment Corpus)</div>
+        <canvas id="scatter"></canvas>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- QUESTIONS -->
+<section id="questions">
+  <div class="s-wrap narrow">
+    <p class="tag-line reveal" style="justify-content:center">06 — Appreciative Aesthetics</p>
+    <h2 class="s-title reveal" style="text-align:center">Towards an <em>Appreciative</em> Reading</h2>
+    <p class="s-body reveal" style="margin:.75rem auto 0;text-align:center">Before asking whether something is cringe, the archive proposes five prior questions — a methodology that centres the performer's conditions rather than the audience's comfort.</p>
+    <div class="q-items">
+      <div class="q-item"><p class="q-text">What is this person <em>trying to do?</em></p></div>
+      <div class="q-item"><p class="q-text">What <em>resources</em> do they have — and what do they not have?</p></div>
+      <div class="q-item"><p class="q-text">What <em>risks</em> are they taking to be visible in this space?</p></div>
+      <div class="q-item"><p class="q-text">Who <em>defined</em> the right way to be visible online — and why do we accept that definition?</p></div>
+      <div class="q-item"><p class="q-text">What happens to those who <em>learn by trying in public,</em> without a safety net of cultural capital?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="man-wrap">
+    <h2 class="man-h reveal">The Archive Insists</h2>
+    <div class="man-items">
+      <div class="man-item reveal"><span class="man-n">I</span><p><strong>That refusal is real.</strong> Even when unintentional. The continued posting — despite mockery, despite shame, despite social correction — is a form of presence that the archive takes seriously.</p></div>
+      <div class="man-item reveal d1"><span class="man-n">II</span><p><strong>That visibility is political.</strong> Who gets to appear on screen without being labeled cringe is not a matter of aesthetics. It is a matter of class, gender, caste, region, and the unequal distribution of cultural capital.</p></div>
+      <div class="man-item reveal d2"><span class="man-n">III</span><p><strong>That the archive record must be expanded.</strong> Most archives preserve successful creators and culturally validated expression. This archive preserves what is usually mocked, dismissed, scrolled past, erased.</p></div>
+    </div>
+    <p class="man-close reveal">"Cringe is evidence of people <em>experimenting with digital selfhood under unequal conditions.</em><br>The archive asks you to watch again — differently."</p>
+  </div>
+</section>
+
+<!-- SO WHAT -->
+<section id="sowhat">
+  <div class="s-wrap">
+    <p class="tag-line reveal">07 — Significance</p>
+    <h2 class="s-title reveal">So <em>What?</em></h2>
+    <p class="s-body reveal" style="margin-top:.75rem">Short-form video is now one of the largest sites of public self-making globally. But only polished performances are algorithmically legitimised. Cringe performances reveal what that system costs.</p>
+    <div class="sw-3">
+      <div class="sw-c reveal"><span class="sw-sym">✦</span><div class="sw-title">Aspiration Without Polish</div><p class="sw-body">The desire to be seen, to perform, to participate in digital culture — without the production values, lighting equipment, or social know-how that platforms algorithmically reward. Cringe is aspiration made visible in its most honest, unfiltered form.</p></div>
+      <div class="sw-c reveal d1"><span class="sw-sym">✦</span><div class="sw-title">Effort Without Fluency</div><p class="sw-body">The visible effort in these performances — the trying — is cultural labor that the cringe label makes invisible. The archive restores this labor to visibility on its own terms, refusing the easy dismissal of the scroll-past.</p></div>
+      <div class="sw-c reveal d2"><span class="sw-sym">✦</span><div class="sw-title">Visibility Without Safety Nets</div><p class="sw-body">Many creators post without knowing the risks — of mockery, harassment, or having their content aggregated in ridicule chains without consent. The archive documents this precarious visibility while refusing to reproduce the harm.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- FUTURE -->
+<section id="future">
+  <div class="s-wrap">
+    <p class="tag-line reveal">08 — Future Expansions</p>
+    <h2 class="s-title reveal">The Archive <em>Continues</em></h2>
+    <div class="fut-3">
+      <div class="fut-card reveal"><span class="fut-badge">In Development</span><div class="fut-title">Expanded Creator Pool (50+)</div><p class="fut-body">Expansion across Bhojpuri, Tamil, Telugu, and Marathi language Reels with dedicated regional annotators to address language limitations in current corpus.</p></div>
+      <div class="fut-card reveal d1"><span class="fut-badge">Planned</span><div class="fut-title">Full Network Visualization</div><p class="fut-body">Dynamic network maps of remix and imitation chains — interactive, filterable by time, creator, and circulation type. Nodes will link to source content.</p></div>
+      <div class="fut-card reveal d2"><span class="fut-badge">Planned</span><div class="fut-title">Longitudinal Comment Corpus</div><p class="fut-body">Time-series analysis of comment sentiment across individual creators' histories — tracking how cringe attribution evolves, intensifies, or transforms as a creator gains followers.</p></div>
+      <div class="fut-card reveal"><span class="fut-badge">Research Phase</span><div class="fut-title">Creator Interviews</div><p class="fut-body">Oral history interviews with creators — centering their own understanding of their practice and their relationship to the platform.</p></div>
+      <div class="fut-card reveal d1"><span class="fut-badge">Planned</span><div class="fut-title">Cross-Platform Comparison</div><p class="fut-body">Does cringe attribution function differently on Moj, Josh, Sharechat, and YouTube Shorts — platforms with different class and regional user distributions?</p></div>
+      <div class="fut-card reveal d2"><span class="fut-badge">Technical</span><div class="fut-title">Full Searchable Database</div><p class="fut-body">A searchable database of the full comment corpus with annotation tags, filterable by creator, theme, sentiment, language, and circulation type.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- BIBLIOGRAPHY -->
+<section id="bib">
+  <div class="s-wrap">
+    <p class="tag-line reveal">09 — Works Cited</p>
+    <h2 class="s-title reveal">References</h2>
+    <div class="bib-cols reveal" style="margin-top:2rem">
+      <p class="bib-e">Ahmed, Sara. <em>The Cultural Politics of Emotion.</em> Routledge, 2004.</p>
+      <p class="bib-e">Althusser, Louis. <em>On the Reproduction of Capitalism.</em> Verso, 2014.</p>
+      <p class="bib-e">Aristotle. <em>Poetics.</em> Trans. Malcolm Heath. Penguin Classics, 1996.</p>
+      <p class="bib-e">Butler, Judith. <em>Gender Trouble.</em> Routledge, 1990.</p>
+      <p class="bib-e">Foucault, Michel. <em>Discipline and Punish.</em> Trans. Alan Sheridan. Vintage, 1995.</p>
+      <p class="bib-e">Gillespie, Tarleton. "The Politics of 'Platforms'." <em>New Media &amp; Society,</em> 12(3), 2010.</p>
+      <p class="bib-e">Goffman, Erving. <em>The Presentation of Self in Everyday Life.</em> Anchor Books, 1959.</p>
+      <p class="bib-e">Greenblatt, Stephen. <em>Renaissance Self-Fashioning.</em> U of Chicago P, 1980.</p>
+      <p class="bib-e">Harvey, Beatrice. "The Ethics of Cringe." <em>Prindle Institute for Ethics,</em> 2021.</p>
+      <p class="bib-e">Ngai, Sianne. <em>Ugly Feelings.</em> Harvard UP, 2005.</p>
+      <p class="bib-e">Pradhan, Shreya, and Brian Drake. "Cringe, Empathy, and Diasporic Spectatorship." 2022.</p>
+      <p class="bib-e">Smilges, J. Logan. "Cringe Theory." <em>Lateral,</em> 2024.</p>
+      <p class="bib-e">Tomkins, Silvan. <em>Affect Imagery Consciousness, Vol. I.</em> Springer, 1962.</p>
+      <p class="bib-e">van Dijck, José. <em>The Culture of Connectivity.</em> Oxford UP, 2013.</p>
+      <p class="bib-e">Wegner, Gesine. "'Kill the Puppies!' Cringe Comedy and Disability Humor." <em>Humanities,</em> 10(3), 2021.</p>
+      <p class="bib-e">Wöhrle, Patrick. "Two Shades of Cringe." <em>Humanities,</em> 10(3), 2021.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-l">
+      <div class="ft">An Archive of Their Own</div>
+      <div class="fs">Harshit · Digital Humanities · 2026</div>
+    </div>
+    <div class="footer-r">"This archive does not preserve people as cringe subjects — but as tiny protests against the right way to be visible."</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-inner">
+    <div class="modal-bar">
+      <button class="modal-close-btn" id="modal-close">Close ✕</button>
+    </div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ── SCROLL PROGRESS ── */
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('scroll-bar').style.width = pct + '%';
+  document.getElementById('nav').classList.toggle('solid', window.scrollY > 60);
+}, { passive: true });
+
+/* ── REVEAL OBSERVER ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── Q-ITEMS OBSERVER ── */
+const qio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); qio.unobserve(e.target); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.q-item').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.12) + 's';
+  qio.observe(el);
+});
+
+/* ── METER BARS — triggered when section enters view ── */
+const mio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.m-item').forEach((item, i) => {
+      const w = item.dataset.w;
+      const fill = item.querySelector('.m-fill');
+      if (fill && w) {
+        setTimeout(() => { fill.style.width = w + '%'; }, i * 120);
+      }
+    });
+    mio.unobserve(e.target);
+  });
+}, { threshold: 0.2 });
+const mlist = document.getElementById('meter-list');
+if (mlist) mio.observe(mlist);
+
+/* ── COMMENT FEED ANIMATION ── */
+const feedEl = document.getElementById('feed');
+if (feedEl) {
+  const fio = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      feedEl.querySelectorAll('.feed-item').forEach((fi, i) => {
+        setTimeout(() => fi.classList.add('shown'), i * 180);
+      });
+      fio.unobserve(feedEl);
+    });
+  }, { threshold: 0.15 });
+  fio.observe(feedEl);
+}
+
+/* ── ENTRY DATA ── */
+const ENTRIES = [
+  { id:'vimla', handle:'vimlagupta88', name:'Vimla Gupta', followers:'28K followers · 15.2K posts', link:'https://www.instagram.com/vimlagupta88/', tags:['class','food','high-freq'],
+    thumb:{ grad:'linear-gradient(155deg,#1a0e06,#3a1a08,#220c04)', col:'#e8924a', pat:'cooking' },
+    badges:[{c:'cl',t:'Class'},{c:'fo',t:'Cooking'},{c:'',t:'Rural'}],
+    meta:[['Performance Type','Domestic Cooking Reel'],['Posting Frequency','Very High (15.2K posts)'],['Editing Level','None — raw, single-shot'],['Language','Hindi'],['Environment','Open fire, outdoor kitchen, rural setting'],['Comment Tone','Mockery + grudging fascination'],['Circulation','Cringe compilations; screenshot shares']],
+    comments:[{t:'I cannot stop watching this. What is wrong with me',f:false},{t:'Bhai ye kya kar rahi hai... but I watched the whole thing',f:false},{t:'Why does she post 10 videos a day, someone stop her',f:false},{t:'Her confidence is genuinely aspirational if you think about it',f:false}],
+    note:'Vimla Gupta documents rural cooking practice rendered visible through the aesthetics of everyday survival. The non-elite interior, open fire, and absence of any lighting setup produce the conditions for cringe attribution. Yet 28K followers return consistently. Her 15.2K posts represent a near-total refusal to be trained by algorithmic feedback.',
+    circ:['YouTube compilations','WhatsApp screenshots','Cringe subreddits'] },
+
+  { id:'neha', handle:'neha_rathor__07', name:'Neha Rathor', followers:'1 Million followers · 9.5K posts', link:'https://www.instagram.com/neha_rathor__07/', tags:['class','dance','gender','high-freq'],
+    thumb:{ grad:'linear-gradient(155deg,#0d0818,#2a1040,#180828)', col:'#c4758a', pat:'dance' },
+    badges:[{c:'ge',t:'Gender'},{c:'cl',t:'Class'},{c:'da',t:'Dance'}],
+    meta:[['Performance Type','Dance / Lip-sync Reel'],['Posting Frequency','High (9.5K posts)'],['Editing Level','Low — raw, minimal colour correction'],['Language','Hindi / Bhojpuri'],['Environment','Street, outdoor, home — wherever she is'],['Comment Tone','Gendered ridicule + fascination; "aunty" discourse'],['Circulation','1M followers; reposted with mocking captions']],
+    comments:[{t:'"Aunty ki himmat ko salaam" — salute to aunty\'s courage',f:false},{t:'Women like these don\'t deserve Instagram. Someone report.',f:true},{t:'This was terrible, same time tomorrow?',f:false},{t:'She is unbothered and it ENRAGES me that I respect it',f:false},{t:'1M followers on "cringe"... maybe we\'re the ones who don\'t get it',f:false}],
+    note:'Neha Rathor\'s 1 million followers document the paradox of cringe spectacle: audiences gather to ridicule but return daily. Her confidence — dancing despite the comment section, through "aunty" shaming — exemplifies the archive\'s central thesis. Cringe attaches specifically because she is "too present," too unapologetic.',
+    circ:['Audio borrowed by 12+ creators','Featured in 3 YouTube compilations','Highest "aunty" keyword density in corpus'] },
+
+  { id:'seema', handle:'seemamishra070', name:'Seema Mishra', followers:'76K followers · 7.6K posts', link:'https://www.instagram.com/seemamishra070/', tags:['gender','class','high-freq'],
+    thumb:{ grad:'linear-gradient(155deg,#0a0d18,#1a2040,#0e1228)', col:'#8ba4c4', pat:'expression' },
+    badges:[{c:'ge',t:'Gender'},{c:'cl',t:'Class'},{c:'',t:'Domestic'}],
+    meta:[['Performance Type','Expressive / Lifestyle Reel'],['Posting Frequency','High (7.6K posts)'],['Editing Level','Minimal'],['Language','Hindi'],['Environment','Home / kitchen / living room'],['Comment Tone','Shame appeals; moral correction; "madam" address'],['Circulation','Screenshot mockery; WhatsApp forwards']],
+    comments:[{t:'"Madam, please understand what Instagram is actually for"',f:true},{t:'Women her age should not be doing this — it\'s shameless',f:true},{t:'Why is she so happy, the confidence is killing me',f:false},{t:'She looks like she\'s having more fun than all of us combined',f:false}],
+    note:'Seema Mishra\'s entry exemplifies how cringe attaches to women who appear "too confident" and "too expressive." The word "madam" is deployed as a distancing address. "Properly" appears in 23% of her comments as instruction. Her continued posting despite sustained negative commentary is the archive\'s key indicator of refusal.',
+    circ:['WhatsApp screenshot circulation','Comment keyword: "madam" (high frequency)'] },
+
+  { id:'zoya', handle:'zoya__jaa_h_', name:'Zoya', followers:'Moderate following', link:'https://www.instagram.com/zoya__jaa_h_/', tags:['queer','gender'],
+    thumb:{ grad:'linear-gradient(155deg,#080d0f,#0f2520,#081510)', col:'#5ac4a0', pat:'queer' },
+    badges:[{c:'qu',t:'Queer / WLW'},{c:'ge',t:'Gender'}],
+    meta:[['Performance Type','Queer Love Performance / WLW'],['Posting Frequency','Moderate'],['Editing Level','Low / raw'],['Language','Hindi / English'],['Environment','Public / semi-private — visible queer intimacy'],['Comment Tone','Moral condemnation; religious appeals; some solidarity'],['Risk Level','High — public queer visibility in India']],
+    comments:[{t:'"This is against Indian culture. Report this account."',f:true},{t:'Disgusting, don\'t do this in public',f:true},{t:'Brave girls honestly — ignore the haters 🏳️‍🌈',f:false},{t:'They are so in love. The comments are the actual cringe.',f:false}],
+    note:'This entry documents how cringe becomes a mechanism for the policing of queer visibility specifically. Women-loving-women content challenges normative desire scripts on Indian social media, where queer public intimacy remains contested. The high-risk nature of this visibility transforms what the audience codes as "cringe" into something closer to courage.',
+    circ:['#love #viral hashtag spread','Screenshot reportage campaigns','Counter-solidarity shares'] },
+
+  { id:'kajal', handle:'kajal_rani_2034', name:'Kajal Rani', followers:'93.8K followers', link:'https://www.instagram.com/', tags:['queer','gender','class'],
+    thumb:{ grad:'linear-gradient(155deg,#180820,#3a1050,#200a30)', col:'#c48ad4', pat:'star' },
+    badges:[{c:'qu',t:'Trans Visibility'},{c:'ge',t:'Gender'},{c:'cl',t:'Class'}],
+    meta:[['Performance Type','Dance / Self-presentation in public'],['Posting Frequency','High'],['Editing Level','Minimal — single take'],['Language','Hindi'],['Environment','Petrol pump / public commercial space'],['Comment Tone','Transphobic ridicule + growing affirmation community'],['Circulation','Reposted widely; meme format; solidarity shares']],
+    comments:[{t:'"Queens don\'t need your approval — keep posting 👑"',f:false},{t:'Why is she at a petrol pump lmaooo',f:false},{t:'The audacity and confidence... honestly iconic and I mean it',f:false},{t:'The comments on this show exactly who people are',f:false}],
+    note:'Trans women\'s visibility on Instagram occupies a particularly fraught terrain, where cringe discourse overlaps with explicit transphobia. This entry documents that overlap while also documenting a counter-community of affirmation. The public, non-domestic performance space (a petrol pump) marks an additional class and spatial refusal.',
+    circ:['Meme format repost','Counter-solidarity shares','Follow spike after viral mockery'] },
+
+  { id:'kalu', handle:'kalu_nayani', name:'Kalu Nayani', followers:'Growing rapidly', link:'https://www.instagram.com/', tags:['class','dance','high-freq'],
+    thumb:{ grad:'linear-gradient(155deg,#0f1508,#283510,#181e08)', col:'#a8c45a', pat:'outdoor' },
+    badges:[{c:'cl',t:'Class'},{c:'',t:'Rural'},{c:'',t:'Outdoor'}],
+    meta:[['Performance Type','Daily Life / Outdoor Rural Activity'],['Posting Frequency','Very High'],['Editing Level','None — raw footage'],['Language','Hindi / Regional dialect'],['Environment','Rural outdoor — fields, dirt paths, village infrastructure'],['Comment Tone','Class-coded ridicule; "Good morning Italy" ironic trend'],['Circulation','Repost compilations; meme remixes']],
+    comments:[{t:'"Good morning Italy 💀" — the ironic misattribution comment trend',f:false},{t:'"Isko Instagram use karna aaata bhi hai?" — does she even know Instagram?',f:true},{t:'The commitment is unmatched. Pure unapologetic energy.',f:false},{t:'She\'s living her best life and we\'re the ones suffering',f:false}],
+    note:'This entry illustrates how class markers — rural outdoor setting, absence of production values, regional dress — become targets of cringe labeling. The ironic "Good morning Italy" trend performs globalized cosmopolitan humor at the expense of rural Indian visibility. The creator continues, unaware or unconcerned — an act of unintentional but powerful refusal.',
+    circ:['"Good morning Italy" meme chain','Rural cringe compilations','Ironic fan accounts'] },
+
+  { id:'tiwri', handle:'tiwripkuri', name:'Tiwri Puri', followers:'849 likes on documented reel', link:'https://www.instagram.com/', tags:['gender','dance','food'],
+    thumb:{ grad:'linear-gradient(155deg,#180e08,#3d2010,#200f08)', col:'#e8a05a', pat:'cooking' },
+    badges:[{c:'ge',t:'Gender'},{c:'da',t:'Expression'},{c:'fo',t:'Food Hybrid'}],
+    meta:[['Performance Type','Expressive Dance / Food Reel hybrid'],['Posting Frequency','Very High'],['Editing Level','Minimal — single shot'],['Language','Hindi'],['Environment','Home interior — kitchen to living room'],['Comment Tone','Disbelief; embarrassment-by-proxy; saving behavior noted'],['Circulation','Saved and reshared despite stated embarrassment']],
+    comments:[{t:'"My secondhand embarrassment is through the roof"',f:false},{t:'"She cooked the food AND my cringe receptors"',f:false},{t:'"Why am I watching this at 2am... and why am I saving it"',f:false},{t:'The joy in her face is... I don\'t know. Don\'t look at me.',f:false}],
+    note:'This entry captures the cathartic economy of cringe consumption: the comment thread documents the paradox of watching — embarrassment acknowledged, yet the reel is saved and returned to. The saving behavior is particularly significant: it reveals that the stated affect (embarrassment) is performing a social function distinct from the actual emotional response.',
+    circ:['Saved-and-reshared pattern','Comment section self-analysis','Private share groups'] },
+
+  { id:'shahida', handle:'shahida_ansari.786', name:'Shahida Ansari', followers:'Small following; viral audio spread', link:'https://www.instagram.com/', tags:['class','dance','circulation'],
+    thumb:{ grad:'linear-gradient(155deg,#080d18,#101a38,#080e20)', col:'#5a8ac4', pat:'audio' },
+    badges:[{c:'cl',t:'Class'},{c:'',t:'Remix Chain'},{c:'',t:'Audio'}],
+    meta:[['Performance Type','POV Skit — hostel / school scenario'],['Posting Frequency','High'],['Editing Level','Low'],['Language','Hindi'],['Environment','Indoor — hostel/school corridor'],['Comment Tone','Mixed — parody + affection + confusion'],['Circulation','Audio used by 6+ creators; strongest chain in archive']],
+    comments:[{t:'"The hostel version of Squid Game is actually sending me"',f:false},{t:'"I can\'t believe she pulled this off — 10/10 commitment"',f:false},{t:'"Someone needs to cast her in something NOW"',f:false},{t:'Her audio got used in a travel reel and a cooking reel on the same day',f:false}],
+    note:'Shahida Ansari\'s entry is notable for documenting the archive\'s most elaborate audio circulation chain — her original audio was used by six documented creators spanning warden skits, travel content, classroom scenarios, and a cooking reel. The creator as unwitting aesthete.',
+    circ:['Audio chain: 6+ documented remixes','Warden skit → travel reel → cooking reel','Cross-genre circulation'] },
+
+  { id:'shakuntla', handle:'shakuntla_comedian28', name:'Shakuntla', followers:'Growing following', link:'https://www.instagram.com/', tags:['class','gender','high-freq'],
+    thumb:{ grad:'linear-gradient(155deg,#181008,#402808,#201508)', col:'#e8c05a', pat:'comedy' },
+    badges:[{c:'ge',t:'Gender'},{c:'cl',t:'Class'},{c:'',t:'Comedy'}],
+    meta:[['Performance Type','Comedy Skit / Stand-up hybrid'],['Posting Frequency','Very High'],['Editing Level','None'],['Language','Hindi / Haryanvi'],['Environment','Rural outdoor — holding cable wires, physical comedy'],['Comment Tone','Confusion + delight + mockery in equal measure'],['Circulation','Screenshot + video reposts; "who is this" viral threads']],
+    comments:[{t:'"Why is she holding all those wires... is this a bit? Is it not a bit?"',f:false},{t:'"She is funnier than every stand-up comedian I\'ve ever watched"',f:false},{t:'"Someone get her a Netflix special"',f:false},{t:'The prop comedy happening organically is unreal',f:false}],
+    note:'Shakuntla\'s entry presents one of the archive\'s most ambiguous cases — where the distinction between intentional comedy and unintentional cringe collapses entirely. The comment section is unusual in its ratio of genuine delight to mockery — suggesting her archive position might be transitioning from cringe subject to cult figure.',
+    circ:['"Is this a bit?" viral thread','Documentary demand comments','Screenshot compilations'] },
+
+  { id:'deepti', handle:'deeptisaroha76', name:'Deepti Saroha', followers:'Active following', link:'https://www.instagram.com/', tags:['class','dance','circulation'],
+    thumb:{ grad:'linear-gradient(155deg,#0a0818,#201530,#100a20)', col:'#9b8dc4', pat:'dance' },
+    badges:[{c:'cl',t:'Class'},{c:'da',t:'Dance'},{c:'',t:'Skit'}],
+    meta:[['Performance Type','Dance-skit hybrid — "hostel warden" POV format'],['Posting Frequency','High'],['Editing Level','Low'],['Language','Hindi'],['Environment','Indoor corridor / stairwell — institutional space'],['Comment Tone','Surprised delight; nostalgia; "my hostel exactly" identification'],['Circulation','Generated the Shahida audio circulation chain; primary source']],
+    comments:[{t:'"My hostel had a warden EXACTLY like this"',f:false},{t:'"The sound she makes at 0:22 is going to be a meme"',f:false},{t:'How does she nail the energy so perfectly without editing',f:false},{t:'"Hostel core" is a genre now because of her',f:false}],
+    note:'Deepti Saroha occupies a transitional position — a creator who began in cringe territory and has moved toward recognized comedy through community recognition. Her "hostel warden" POV format generated the archive\'s most documented audio circulation chain. The performance didn\'t change; the audience\'s frame changed.',
+    circ:['Audio chain originator','Hostel genre-defining entry','Frame-shift from cringe to cult'] },
+
+  { id:'anita', handle:'anitaas202', name:'Anita', followers:'Small following; growing', link:'https://www.instagram.com/', tags:['class','food','gender'],
+    thumb:{ grad:'linear-gradient(155deg,#180d0a,#3d1f10,#200c05)', col:'#e87a5a', pat:'cooking' },
+    badges:[{c:'cl',t:'Class'},{c:'fo',t:'Food'},{c:'ge',t:'Gender'}],
+    meta:[['Performance Type','Home cooking — pressure cooker / dal reel'],['Posting Frequency','High'],['Editing Level','None'],['Language','Hindi'],['Environment','Modest home kitchen — visible economic context'],['Comment Tone','Food-gate discourse; "cooker" comments; domestic criticism'],['Circulation','Screenshot WhatsApp; cooking group mockery chains']],
+    comments:[{t:'"She put the masala in the WRONG ORDER"',f:false},{t:'"Who taught her this recipe... respectfully"',f:false},{t:'"The cooker pressure coming up while she dances is SENDING me"',f:false},{t:'The energy of not caring that she\'s doing it "wrong" is everything',f:false}],
+    note:'Anita\'s entry documents food-specific cringe, where culinary "error" becomes the vector of ridicule. Comment sections on cooking Reels develop their own micro-norms of correction that reproduce class and caste hierarchies through aesthetic judgment. Her refusal to cook "correctly" or apologetically is read as incompetence. The archive reads it as the documentation of a genuine home kitchen, unmediated.',
+    circ:['Cooking group WhatsApp shares','Food-criticism comment chains','Cross-post to cooking forums'] },
+
+  { id:'feel', handle:'feel.the.reel', name:'Feel the Reel (Aggregator)', followers:'Aggregator account', link:'https://www.instagram.com/', tags:['circulation','class','gender'],
+    thumb:{ grad:'linear-gradient(155deg,#080812,#15151e,#0a0a14)', col:'#888ab4', pat:'archive' },
+    badges:[{c:'',t:'Aggregator'},{c:'',t:'Circulation Node'},{c:'',t:'Secondary Content'}],
+    meta:[['Performance Type','Compilation / Re-post account'],['Posting Frequency','Very High'],['Editing Level','Low — text overlay, caption edits'],['Language','Hindi / English'],['Environment','N/A — secondary account'],['Comment Tone','Reinforces cringe framing; "I can\'t believe this exists"'],['Circulation','Key node: distributes content with cringe label pre-applied']],
+    comments:[{t:'"Thank you for finding these so I don\'t have to"',f:false},{t:'"The service this account provides to the community"',f:false},{t:'This account is a cringe museum and I visit daily',f:false}],
+    note:'This entry documents a secondary account (aggregator) rather than a primary creator. Accounts like @feel.the.reel pre-apply the cringe frame, stripping original context and inserting content directly into ridicule culture. The primary creator\'s visibility is thus mediated by a secondary editor who has already done the interpretive work of labeling.',
+    circ:['Network node — cringe distributor','Pre-frames primary creator content','Feeds YouTube compilation pipeline'] },
+
+  { id:'preet', handle:'preethi_raj_dance', name:'Preethi Raj', followers:'Small; growing through ridicule', link:'https://www.instagram.com/', tags:['class','dance','gender'],
+    thumb:{ grad:'linear-gradient(155deg,#0d1008,#1f2810,#0d1508)', col:'#78c45a', pat:'dance' },
+    badges:[{c:'da',t:'Dance'},{c:'ge',t:'Gender'},{c:'cl',t:'Class'}],
+    meta:[['Performance Type','Classical / Folk dance hybrid — semi-outdoor'],['Posting Frequency','Moderate-high'],['Editing Level','Low — single camera, no colour grade'],['Language','Tamil / Hindi'],['Environment','Outdoor semi-rural — visible background, natural light'],['Comment Tone','Regional origin comments; some solidarity'],['Circulation','Regional cringe channels; North-South comparison discourse']],
+    comments:[{t:'"South Indian energy fully unleashed and I mean that with love"',f:false},{t:'"The background is so... authentic"',f:false},{t:'"She dances better than me and I\'ve had 10 years of training"',f:false},{t:'Why are the most unbothered people always from smaller towns',f:false}],
+    note:'Preethi Raj\'s entry adds a regional and linguistic dimension to the archive. The "background clutter" comment discourse performs a particularly revealing form of class policing: the judgment is not of the dancer but of the economic reality of the space she dances in. The home\'s honest visibility — no tidied-up backdrop — is the transgression.',
+    circ:['Regional cringe channel reposts','North-South "comparison" comment threads','Dance form misidentification discourse'] },
+
+  { id:'pooja', handle:'pooja_devi_official2', name:'Pooja Devi', followers:'200K+ and growing', link:'https://www.instagram.com/', tags:['class','gender','dance','high-freq'],
+    thumb:{ grad:'linear-gradient(155deg,#100808,#301010,#180808)', col:'#e85a5a', pat:'star' },
+    badges:[{c:'ge',t:'Gender'},{c:'cl',t:'Class'},{c:'da',t:'Dance'},{c:'',t:'Viral'}],
+    meta:[['Performance Type','Folk dance / bhangra-adjacent — celebratory'],['Posting Frequency','Very High'],['Editing Level','Low'],['Language','Haryanvi / Hindi'],['Environment','Rural outdoor — harvested fields, village setting'],['Comment Tone','Initially mockery; increasingly solidarity'],['Circulation','Viral moment → solidarity counter-wave → mainstream media']],
+    comments:[{t:'"She is literally glowing. The fields are her stage."',f:false},{t:'"This is what folk culture looks like when it doesn\'t perform for your comfort"',f:false},{t:'From cringe to viral to icon in 3 months... this is the arc',f:false},{t:'This is what joy looks like when it\'s not edited for your algorithm',f:false}],
+    note:'Pooja Devi represents one of the archive\'s most significant trajectory cases — a creator who moved from sustained cringe attribution to viral solidarity, ultimately receiving mainstream media attention. The key variable was not a change in her content but a shift in audience composition. Cringe status is not intrinsic but contingent on who is watching.',
+    circ:['Solidarity viral wave','Mainstream media feature','Archive of trajectory shift — mockery to icon'] },
+
+  { id:'meena', handle:'meena_kumari_official_5', name:'Meena Kumari', followers:'45K followers', link:'https://www.instagram.com/', tags:['gender','class','dance'],
+    thumb:{ grad:'linear-gradient(155deg,#0a0818,#181030,#0d0820)', col:'#a08ac4', pat:'expression' },
+    badges:[{c:'ge',t:'Gender'},{c:'cl',t:'Class'},{c:'',t:'Confidence'}],
+    meta:[['Performance Type','Lifestyle vlog / self-expression hybrid'],['Posting Frequency','High'],['Editing Level','Low'],['Language','Hindi — Bihari accent'],['Environment','Home — modest interior with wedding photos'],['Comment Tone','"Properly" keyword dominant; instruction-heavy discourse'],['Circulation','Used as negative example in social media advice content']],
+    comments:[{t:'"Please learn how to use Instagram properly"',f:true},{t:'"You\'re doing it wrong. Here let me explain." — 47 comment thread follows',f:true},{t:'"The wedding photos in the background are the most wholesome thing on my feed"',f:false},{t:'Everyone in her comments is a "social media expert" she did not ask for',f:false}],
+    note:'Meena Kumari\'s entry documents the most intense "instruction culture" in the archive — audiences appointing themselves as tutors. The word "properly" appears in 41% of her visible comments — the highest frequency keyword in any single entry. This instruction discourse reproduces class norms through the language of digital literacy.',
+    circ:['Negative example in social media advice content','"Properly" keyword — highest frequency in corpus','Instruction-culture documentation'] },
+
+  { id:'sunita', handle:'sunita_dances_07', name:'Sunita', followers:'18K followers', link:'https://www.instagram.com/', tags:['gender','dance','queer'],
+    thumb:{ grad:'linear-gradient(155deg,#080d18,#102035,#081018)', col:'#5aaac4', pat:'queer' },
+    badges:[{c:'ge',t:'Gender'},{c:'da',t:'Dance'},{c:'qu',t:'Queer Adjacent'}],
+    meta:[['Performance Type','Solo dance — expressive, physically uninhibited'],['Posting Frequency','Moderate'],['Editing Level','Low'],['Language','Hindi'],['Environment','Public outdoor space — street, park, market'],['Comment Tone','Heteronormative policing; "ladki" discourse; queer solidarity'],['Circulation','Shared in queer solidarity networks AND cringe mockery spaces simultaneously']],
+    comments:[{t:'"Ladki aisi nahi hoti" — girls don\'t behave like this',f:true},{t:'"She moves like she invented freedom"',f:false},{t:'"I don\'t know what she is but I want to be like her"',f:false},{t:'The public space claiming here is genuinely radical',f:false}],
+    note:'Sunita\'s entry documents a case where the same content circulates in two completely opposed networks simultaneously — in queer solidarity spaces as an image of liberated selfhood, and in cringe mockery spaces as inappropriateness. This dual circulation reveals that cringe attribution is entirely audience-dependent, not content-dependent.',
+    circ:['Dual circuit: solidarity AND mockery','Queer solidarity network shares','Heteronormative policing comments'] },
+];
+
+/* ── SVG ICON PATTERNS FOR THUMBNAILS ── */
+const PATS = {
+  cooking: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <circle cx="50" cy="65" r="26" stroke-width="2.5" opacity=".7"/>
+    <line x1="50" y1="12" x2="50" y2="39" stroke-width="2.5"/>
+    <line x1="41" y1="20" x2="41" y2="39" stroke-width="2" opacity=".5"/>
+    <line x1="59" y1="20" x2="59" y2="39" stroke-width="2" opacity=".5"/>
+    <line x1="24" y1="65" x2="76" y2="65" stroke-width="1.5" opacity=".3"/>
+  </svg>`,
+  dance: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <circle cx="50" cy="20" r="9" stroke-width="2.5"/>
+    <line x1="50" y1="29" x2="50" y2="58" stroke-width="2.5"/>
+    <line x1="50" y1="44" x2="30" y2="34" stroke-width="2"/>
+    <line x1="50" y1="44" x2="70" y2="37" stroke-width="2"/>
+    <line x1="50" y1="58" x2="36" y2="80" stroke-width="2.5"/>
+    <line x1="50" y1="58" x2="66" y2="82" stroke-width="2.5"/>
+  </svg>`,
+  expression: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <circle cx="50" cy="50" r="34" stroke-width="2.5" opacity=".7"/>
+    <circle cx="38" cy="43" r="4" fill="currentColor" opacity=".6"/>
+    <circle cx="62" cy="43" r="4" fill="currentColor" opacity=".6"/>
+    <path d="M35 64 Q50 78 65 64" stroke-width="2.5" fill="none"/>
+  </svg>`,
+  queer: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+    <path d="M50 14 L59 40 L86 40 L64 56 L72 82 L50 66 L28 82 L36 56 L14 40 L41 40Z" stroke-width="2" opacity=".7"/>
+    <circle cx="50" cy="50" r="14" stroke-width="1.5" opacity=".35"/>
+  </svg>`,
+  star: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+    <path d="M50 10 L59 36 L87 36 L65 53 L73 79 L50 62 L27 79 L35 53 L13 36 L41 36Z" stroke-width="2.5"/>
+    <path d="M50 30 L55 44 L70 44 L58 52 L63 66 L50 58 L37 66 L42 52 L30 44 L45 44Z" fill="currentColor" opacity=".15"/>
+  </svg>`,
+  outdoor: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M8 78 L34 34 L50 55 L66 28 L92 78Z" stroke-width="2" opacity=".65"/>
+    <circle cx="22" cy="26" r="11" stroke-width="2" opacity=".5"/>
+    <line x1="8" y1="78" x2="92" y2="78" stroke-width="1.5" opacity=".3"/>
+  </svg>`,
+  audio: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <rect x="36" y="18" width="28" height="42" rx="14" stroke-width="2.5"/>
+    <path d="M20 54 C20 72 80 72 80 54" stroke-width="2.5" fill="none"/>
+    <line x1="50" y1="72" x2="50" y2="86" stroke-width="2.5"/>
+    <line x1="34" y1="86" x2="66" y2="86" stroke-width="2"/>
+    <line x1="42" y1="36" x2="58" y2="36" stroke-width="1.5" opacity=".4"/>
+    <line x1="42" y1="44" x2="58" y2="44" stroke-width="1.5" opacity=".4"/>
+  </svg>`,
+  comedy: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <circle cx="50" cy="50" r="33" stroke-width="2.5" opacity=".7"/>
+    <circle cx="38" cy="42" r="5" fill="currentColor" opacity=".6"/>
+    <circle cx="62" cy="42" r="5" fill="currentColor" opacity=".6"/>
+    <path d="M32 65 Q40 75 50 75 Q60 75 68 65" stroke-width="2.5" fill="none"/>
+    <line x1="28" y1="26" x2="22" y2="14" stroke-width="1.5" opacity=".4"/>
+    <line x1="72" y1="26" x2="78" y2="14" stroke-width="1.5" opacity=".4"/>
+  </svg>`,
+  archive: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round">
+    <rect x="14" y="14" width="72" height="13" rx="2" stroke-width="2"/>
+    <rect x="14" y="32" width="72" height="54" rx="2" stroke-width="2"/>
+    <line x1="34" y1="56" x2="66" y2="56" stroke-width="2"/>
+    <line x1="34" y1="66" x2="66" y2="66" stroke-width="1.5" opacity=".5"/>
+    <line x1="34" y1="74" x2="54" y2="74" stroke-width="1.5" opacity=".3"/>
+  </svg>`,
+};
+
+/* ── THUMBNAIL HTML ── */
+function thumbHTML(e) {
+  const pat = PATS[e.thumb.pat] || PATS.expression;
+  return `<div class="thumb">
+    <div class="thumb-bg" style="background:${e.thumb.grad}"></div>
+    <div class="thumb-pattern" style="color:${e.thumb.col}">${pat}</div>
+    <div class="thumb-grad"></div>
+    <div class="thumb-play"></div>
+    <div class="thumb-info">
+      <div class="thumb-handle"><span class="at">@</span>${e.handle}</div>
+      <div class="thumb-count">${e.followers}</div>
+      <a class="thumb-igbtn" href="${e.link}" target="_blank" rel="noopener">View on Instagram ↗</a>
+    </div>
+  </div>`;
+}
+
+/* ── BUILD CARDS ── */
+function buildCards(list) {
+  const grid = document.getElementById('entry-grid');
+  grid.innerHTML = '';
+  list.forEach(e => {
+    const card = document.createElement('div');
+    card.className = 'ecard';
+    card.dataset.tags = e.tags.join(' ');
+    card.dataset.search = (e.handle + ' ' + e.name + ' ' + e.note + ' ' + e.tags.join(' ')).toLowerCase();
+    card.innerHTML = thumbHTML(e) + `
+      <div class="card-head">
+        <div class="card-creator">
+          <div class="card-name">@${e.handle}</div>
+          <div class="card-meta-sub">${e.followers}</div>
+        </div>
+        <div class="card-tags">${e.badges.map(b => `<span class="tag ${b.c}">${b.t}</span>`).join('')}</div>
+      </div>
+      <div class="card-info">
+        ${e.meta.map(m => `<div class="info-row"><span class="ik">${m[0]}</span><span class="iv">${m[1]}</span></div>`).join('')}
+      </div>
+      <div class="card-comments">
+        <div class="comments-label">Selected Comments</div>
+        ${e.comments.slice(0,3).map(c => `<div class="cmt${c.f?' flagged':''}">${c.t}</div>`).join('')}
+      </div>
+      <div class="card-note">
+        <div class="note-label">Curator Note</div>
+        <p class="note-text">${e.note.slice(0,180)}…</p>
+      </div>
+      <button class="card-expand" data-id="${e.id}">Read Full Entry</button>`;
+    grid.appendChild(card);
+  });
+  grid.querySelectorAll('.card-expand').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.id));
+  });
+}
+buildCards(ENTRIES);
+
+/* ── FILTER + SEARCH ── */
+let activeFilter = 'all';
+document.querySelectorAll('.fchip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fchip').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    activeFilter = btn.dataset.f;
+    applyFilter();
+  });
+});
+document.getElementById('q').addEventListener('input', applyFilter);
+function applyFilter() {
+  const q = document.getElementById('q').value.toLowerCase();
+  const filtered = ENTRIES.filter(e => {
+    const tagOk = activeFilter === 'all' || e.tags.includes(activeFilter);
+    const searchOk = !q || e.dataset_s && e.dataset_s.includes(q) ||
+      (e.handle + ' ' + e.name + ' ' + e.note + ' ' + e.tags.join(' ')).toLowerCase().includes(q);
+    return tagOk && searchOk;
+  });
+  buildCards(filtered);
+}
+
+/* ── MODAL ── */
+function openModal(id) {
+  const e = ENTRIES.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('modal-content').innerHTML = `
+    <div style="display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem;margin-bottom:2rem">
+      <span style="font-family:var(--f-mono);font-size:.8rem;color:var(--gold)">@${e.handle}</span>
+      <span style="color:var(--parch-30);font-size:.7rem">${e.followers}</span>
+      <a href="${e.link}" target="_blank" style="margin-left:auto;font-family:var(--f-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);border:1px solid var(--rose);padding:.28rem .7rem">Open on Instagram ↗</a>
+    </div>
+    <div style="height:220px;overflow:hidden;border:1px solid var(--border);margin-bottom:2rem">${thumbHTML(e)}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-family:var(--f-mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lav);border-bottom:1px solid var(--border);padding-bottom:.5rem;margin-bottom:.75rem">Metadata</div>
+        ${e.meta.map(m => `<div class="info-row"><span class="ik">${m[0]}</span><span class="iv">${m[1]}</span></div>`).join('')}
+      </div>
+      <div>
+        <div style="font-family:var(--f-mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lav);border-bottom:1px solid var(--border);padding-bottom:.5rem;margin-bottom:.75rem">Full Comment Discourse</div>
+        ${e.comments.map(c => `<div style="font-family:var(--f-body);font-style:italic;font-size:.95rem;line-height:1.6;color:${c.f?'var(--rose)':'var(--parch-60)'};padding:.4rem 0;border-bottom:1px solid rgba(240,234,216,.04)">${c.t}</div>`).join('')}
+      </div>
+    </div>
+    <div style="font-family:var(--f-mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lav);margin-bottom:.75rem">Full Curator Note</div>
+    <div style="font-family:var(--f-body);font-size:1.05rem;line-height:1.85;color:var(--parch-60);border-left:2px solid var(--rose);padding:1.25rem 1.5rem;background:rgba(106,24,48,.08);margin-bottom:2rem">${e.note}</div>
+    ${e.circ ? `<div style="font-family:var(--f-mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lav);margin-bottom:.6rem">Circulation Patterns</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem">${e.circ.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+  `;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ══════════════════════════════════════
+   DATA VISUALIZATIONS
+   All chart code runs after window load
+   to guarantee correct dimensions.
+══════════════════════════════════════ */
+window.addEventListener('load', function() {
+
+  /* ── WORD CLOUD ── */
+  (function() {
+    const words = [
+      {t:"don't",s:3.0,c:'#d4768a'},{t:'aunty',s:2.6,c:'#c9a84c'},{t:'people',s:2.3,c:'#9b8ec4'},
+      {t:'women',s:2.2,c:'#d4768a'},{t:'properly',s:2.0,c:'#f0ead8'},{t:'video',s:1.9,c:'#9b8ec4'},
+      {t:'madam',s:1.8,c:'#c9a84c'},{t:'dance',s:1.7,c:'#4e9a9c'},{t:'disgust',s:1.6,c:'#d4768a'},
+      {t:'girl',s:1.6,c:'#f0ead8'},{t:'cooker',s:1.4,c:'#c9a84c'},{t:'masala',s:1.3,c:'#c9a84c'},
+      {t:'can',s:1.8,c:'rgba(240,234,216,.5)'},{t:'report',s:1.5,c:'#d4768a'},{t:'please',s:1.5,c:'rgba(240,234,216,.5)'},
+      {t:'family',s:1.3,c:'rgba(240,234,216,.5)'},{t:'religious',s:1.2,c:'rgba(240,234,216,.4)'},{t:'comment',s:1.3,c:'#9b8ec4'},
+      {t:'view',s:1.1,c:'rgba(240,234,216,.4)'},{t:'shameless',s:1.4,c:'#d4768a'},{t:'why',s:1.7,c:'rgba(240,234,216,.5)'},
+      {t:'aunti',s:1.2,c:'#c9a84c'},{t:'india',s:1.2,c:'rgba(240,234,216,.4)'},{t:'culture',s:1.3,c:'rgba(240,234,216,.4)'},
+      {t:'modesty',s:1.1,c:'rgba(240,234,216,.35)'},{t:'lost',s:1.1,c:'rgba(240,234,216,.35)'},{t:'cringe',s:2.5,c:'#8a2240'},
+      {t:'watching',s:1.4,c:'rgba(240,234,216,.5)'},{t:'algorithm',s:1.3,c:'#4e9a9c'},{t:'terrible',s:1.5,c:'#d4768a'},
+    ];
+    const wc = document.getElementById('wc');
+    words.forEach(w => {
+      const s = document.createElement('span');
+      s.className = 'wc-word';
+      s.textContent = w.t;
+      s.style.fontSize = w.s + 'rem';
+      s.style.color = w.c;
+      s.style.opacity = 0.5 + Math.random() * 0.5;
+      s.style.padding = '0 .2rem';
+      wc.appendChild(s);
+    });
+  })();
+
+  /* ── BAR CHART — pure SVG, no CSS animation conflicts ── */
+  function drawBarChart(containerId, data, colA, colB) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const max = Math.max(...data.map(d => d.v));
+    const rowH = 26, gap = 10, labelW = 100, valW = 40, padL = 10, padR = 10;
+    const totalH = data.length * (rowH + gap) - gap + 10;
+    const barZone = 360;
+    const totalW = padL + labelW + barZone + valW + padR;
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${totalW} ${totalH}`);
+    svg.setAttribute('width', '100%');
+    svg.style.overflow = 'visible';
+
+    const defs = document.createElementNS(svgNS, 'defs');
+    const grad = document.createElementNS(svgNS, 'linearGradient');
+    grad.setAttribute('id', 'bg-' + containerId);
+    grad.setAttribute('x1','0'); grad.setAttribute('x2','1');
+    [['#6a1830','0%'],['#d4768a','100%']].forEach(([col, off]) => {
+      const stop = document.createElementNS(svgNS, 'stop');
+      stop.setAttribute('offset', off);
+      stop.setAttribute('stop-color', col);
+      grad.appendChild(stop);
+    });
+    defs.appendChild(grad);
+    svg.appendChild(defs);
+
+    data.forEach((d, i) => {
+      const y = i * (rowH + gap);
+      const barW = (d.v / max) * barZone;
+      const x0 = padL + labelW;
+
+      // label
+      const lbl = document.createElementNS(svgNS, 'text');
+      lbl.setAttribute('x', padL + labelW - 8);
+      lbl.setAttribute('y', y + rowH * .68);
+      lbl.setAttribute('text-anchor', 'end');
+      lbl.setAttribute('font-family', '"DM Mono", monospace');
+      lbl.setAttribute('font-size', '10');
+      lbl.setAttribute('fill', 'rgba(240,234,216,0.45)');
+      lbl.textContent = d.k;
+      svg.appendChild(lbl);
+
+      // track
+      const track = document.createElementNS(svgNS, 'rect');
+      track.setAttribute('x', x0);
+      track.setAttribute('y', y);
+      track.setAttribute('width', barZone);
+      track.setAttribute('height', rowH);
+      track.setAttribute('fill', 'rgba(240,234,216,0.04)');
+      svg.appendChild(track);
+
+      // bar — set width directly, no animation (avoids all observer issues)
+      const bar = document.createElementNS(svgNS, 'rect');
+      bar.setAttribute('x', x0);
+      bar.setAttribute('y', y);
+      bar.setAttribute('width', 0);
+      bar.setAttribute('height', rowH);
+      bar.setAttribute('fill', `url(#bg-${containerId})`);
+      svg.appendChild(bar);
+
+      // value
+      const val = document.createElementNS(svgNS, 'text');
+      val.setAttribute('x', x0 + barZone + 8);
+      val.setAttribute('y', y + rowH * .68);
+      val.setAttribute('font-family', '"DM Mono", monospace');
+      val.setAttribute('font-size', '10');
+      val.setAttribute('fill', '#d4768a');
+      val.textContent = d.v;
+      svg.appendChild(val);
+
+      // animate bar width using requestAnimationFrame
+      const targetW = barW;
+      const delay = 400 + i * 100;
+      const dur = 1200;
+      const start = performance.now() + delay;
+      function animateBar(now) {
+        if (now < start) { requestAnimationFrame(animateBar); return; }
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / dur, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        bar.setAttribute('width', targetW * ease);
+        if (progress < 1) requestAnimationFrame(animateBar);
+      }
+      requestAnimationFrame(animateBar);
+    });
+
+    container.appendChild(svg);
+  }
+
+  drawBarChart('bar1', [
+    {k:"don't", v:8.4},{k:'aunty', v:7.1},{k:'people', v:6.3},{k:'women', v:5.8},
+    {k:'properly', v:5.5},{k:'video', v:5.2},{k:'madam', v:4.9},{k:'dance', v:4.3},
+    {k:'disgust', v:3.9},{k:'girl', v:3.6},
+  ]);
+  drawBarChart('bar2', [
+    {k:'Food / Cooking', v:1.85},{k:'Social Criticism', v:1.62},{k:'Moral Correction', v:1.41},
+    {k:'Personal Behav.', v:1.19},{k:'Gender Policing', v:1.05},{k:'Solidarity', v:0.72},
+    {k:'Queer Hostility', v:0.65},
+  ]);
+
+  /* ── DONUT CHART ── */
+  (function() {
+    const svg = document.getElementById('donut-svg');
+    const legend = document.getElementById('donut-legend');
+    if (!svg || !legend) return;
+
+    const segments = [
+      {pct:34, col:'#7a1f3d', label:'Ridicule / Mockery'},
+      {pct:21, col:'#d4768a', label:'Moral Correction'},
+      {pct:20, col:'#9b8ec4', label:'Ambivalent Fascination'},
+      {pct:15, col:'#c9a84c', label:'Solidarity / Affirmation'},
+      {pct:10, col:'#4e9a9c', label:'Confusion / Disbelief'},
+    ];
+
+    const cx = 85, cy = 85, r = 62, sw = 24;
+    const circ = 2 * Math.PI * r;
+
+    // background ring
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const bg = document.createElementNS(svgNS, 'circle');
+    bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r);
+    bg.setAttribute('fill', 'none'); bg.setAttribute('stroke', 'rgba(240,234,216,0.06)');
+    bg.setAttribute('stroke-width', sw);
+    svg.appendChild(bg);
+
+    let accumulated = 0; // in svg units (not percent)
+
+    segments.forEach(seg => {
+      const segLen = (seg.pct / 100) * circ;
+
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', r);
+      circle.setAttribute('fill', 'none');
+      circle.setAttribute('stroke', seg.col);
+      circle.setAttribute('stroke-width', sw);
+      // dasharray: show this segment's length, hide the rest
+      circle.setAttribute('stroke-dasharray', `${segLen} ${circ - segLen}`);
+      // dashoffset: negative value = move dash start forward along path
+      // rotate(-90) starts the path from the top; negative offset shifts forward (clockwise)
+      circle.setAttribute('stroke-dashoffset', -accumulated);
+      circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+      svg.appendChild(circle);
+
+      // legend
+      const item = document.createElement('div');
+      item.className = 'dl';
+      item.innerHTML = `<div class="dl-dot" style="background:${seg.col}"></div>${seg.label} (${seg.pct}%)`;
+      legend.appendChild(item);
+
+      accumulated += segLen;
+    });
+  })();
+
+  /* ── SCATTER / CLUSTER PLOT ── */
+  (function() {
+    const canvas = document.getElementById('scatter');
+    if (!canvas) return;
+    // set explicit pixel dimensions
+    canvas.width  = canvas.parentElement.clientWidth - 64;
+    canvas.height = 280;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    const clusters = [
+      { name:'Shame / Correction', col:'#7a1f3d', pts:[{x:.20,y:.28},{x:.15,y:.36},{x:.26,y:.20},{x:.12,y:.30},{x:.30,y:.34},{x:.10,y:.44},{x:.23,y:.16}] },
+      { name:'Class Markers',      col:'#c9a84c', pts:[{x:.55,y:.55},{x:.62,y:.47},{x:.58,y:.64},{x:.68,y:.57},{x:.52,y:.62},{x:.72,y:.50}] },
+      { name:'Gender Policing',    col:'#9b8ec4', pts:[{x:.78,y:.26},{x:.85,y:.20},{x:.82,y:.37},{x:.75,y:.31},{x:.88,y:.31},{x:.80,y:.17}] },
+      { name:'Fascination',        col:'#d4768a', pts:[{x:.42,y:.78},{x:.50,y:.72},{x:.38,y:.72},{x:.48,y:.82},{x:.55,y:.80}] },
+      { name:'Solidarity',         col:'#4e9a9c', pts:[{x:.16,y:.72},{x:.10,y:.65},{x:.20,y:.78},{x:.07,y:.78}] },
+    ];
+
+    // faint grid
+    ctx.strokeStyle = 'rgba(240,234,216,.04)'; ctx.lineWidth = 1;
+    for (let i = 0; i <= 8; i++) {
+      ctx.beginPath(); ctx.moveTo(i/8*W, 0); ctx.lineTo(i/8*W, H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, i/8*H); ctx.lineTo(W, i/8*H); ctx.stroke();
+    }
+
+    clusters.forEach(cl => {
+      const pts = cl.pts.map(p => ({px: p.x*W, py: p.y*H}));
+      const cx2 = pts.reduce((a,b) => a + b.px, 0) / pts.length;
+      const cy2 = pts.reduce((a,b) => a + b.py, 0) / pts.length;
+      const rx2 = Math.max(...pts.map(p => Math.abs(p.px - cx2))) + 22;
+      const ry2 = Math.max(...pts.map(p => Math.abs(p.py - cy2))) + 22;
+
+      // cluster ellipse
+      ctx.beginPath(); ctx.ellipse(cx2, cy2, rx2, ry2, 0, 0, Math.PI*2);
+      ctx.fillStyle = cl.col + '18'; ctx.fill();
+      ctx.strokeStyle = cl.col + '55'; ctx.lineWidth = 1.5; ctx.stroke();
+
+      // label
+      ctx.fillStyle = cl.col;
+      ctx.font = 'bold 10px "DM Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(cl.name, cx2, cy2 + ry2 + 16);
+
+      // points
+      pts.forEach(p => {
+        // glow
+        const grd = ctx.createRadialGradient(p.px, p.py, 0, p.px, p.py, 9);
+        grd.addColorStop(0, cl.col + 'cc'); grd.addColorStop(1, cl.col + '00');
+        ctx.beginPath(); ctx.arc(p.px, p.py, 8, 0, Math.PI*2);
+        ctx.fillStyle = grd; ctx.fill();
+        // dot
+        ctx.beginPath(); ctx.arc(p.px, p.py, 3.5, 0, Math.PI*2);
+        ctx.fillStyle = cl.col; ctx.fill();
+      });
+    });
+
+    // axis labels
+    ctx.fillStyle = 'rgba(240,234,216,.22)';
+    ctx.font = '9px "DM Mono", monospace'; ctx.textAlign = 'center';
+    ctx.fillText('← Hostility', W*.12, H - 6);
+    ctx.fillText('Solidarity →', W*.78, H - 6);
+    ctx.save(); ctx.translate(10, H*.5); ctx.rotate(-Math.PI/2);
+    ctx.fillText('Gender policing ↑', 0, 0); ctx.restore();
+  })();
+
+}); // end window.load
+
+</script>
+</body>
+</html>
